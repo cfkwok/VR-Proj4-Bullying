@@ -16,6 +16,7 @@ public class SOneMovement : MonoBehaviour {
     private bool destReached = false;
     private bool showMenu = false;
     private bool fadeMenu = false;
+    private Text textQuestion;
     private Button opt1;
     private Button opt2;
     float smooth = 2.0F;
@@ -27,8 +28,12 @@ public class SOneMovement : MonoBehaviour {
         head = GameObject.Find("CardboardMain/Head");
         panelGroup = GameObject.Find("QuestionMenu").GetComponent<CanvasGroup>();
         dest = new Vector3(player.transform.position.x, player.transform.position.y, -3.0f);
+        textQuestion = GameObject.Find("Question").GetComponent<Text>();
         opt1 = GameObject.Find("Button1").GetComponent<Button>();
         opt2 = GameObject.Find("Button2").GetComponent<Button>();
+        textQuestion.text = "Is Craig a scrub?";
+        opt1.GetComponentInChildren<Text>().text = "Yes";
+        opt2.GetComponentInChildren<Text>().text = "Of course";
         disableMenu();
     }
     
@@ -81,6 +86,14 @@ public class SOneMovement : MonoBehaviour {
         }
     }
 
+    // For delayed script execution
+    IEnumerator ExecuteAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        print(time);
+    }
+
     void OnTriggerEnter(Collider other)
     {
         // Player reached trigger dest, can do animation here
@@ -105,6 +118,7 @@ public class SOneMovement : MonoBehaviour {
         if (!showMenu)
         {
             fadeMenu = true;
+            // StartCoroutine(ExecuteAfterTime(5));
         }
     }
 
