@@ -9,6 +9,8 @@ public class SOneMovement : MonoBehaviour {
 
     //private CardboardHead head = null;
     private GameObject head;
+    private Animator friendAnimator;
+    private Animator victimAnimator;
     private CanvasGroup panelGroup;
     private Vector3 dest = new Vector3(0, 0, 0);
     private bool started = false;
@@ -35,6 +37,9 @@ public class SOneMovement : MonoBehaviour {
         opt1.GetComponentInChildren<Text>().text = "Yes";
         opt2.GetComponentInChildren<Text>().text = "Of course";
         disableMenu();
+
+        friendAnimator = GameObject.Find("Friend").GetComponent<Animator>();
+        victimAnimator = GameObject.Find("Bullied").GetComponent<Animator>();
     }
     
     void Update()
@@ -42,16 +47,25 @@ public class SOneMovement : MonoBehaviour {
         float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
         float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
         Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
-        //transform.Rotate(Vector3.forward, Time.deltaTime * smooth);
         transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
         if (Cardboard.SDK.Triggered && !started)
-        {
+        {            
             startFlag = true;
             started = true;
         }
         if (startFlag)
         {
             player.transform.position = Vector3.Lerp(player.transform.position, dest, speed * Time.deltaTime);
+        }
+        if (destReached)
+        {
+            if (victimAnimator.GetCurrentAnimatorStateInfo(0).IsName("being_strangled"))
+            {
+                if (victimAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+                {
+                    victimAnimator.SetInteger("Current State", 2);
+                }
+            }
         }
         if (showMenu && !fadeMenu)
         {
@@ -61,6 +75,7 @@ public class SOneMovement : MonoBehaviour {
         {
             disableMenu();
         }
+        
            
     }
 
@@ -86,21 +101,25 @@ public class SOneMovement : MonoBehaviour {
         }
     }
 
+    /*
     // For delayed script execution
     IEnumerator ExecuteAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
 
-        print(time);
+        victimAnimator.SetInteger("Current State", 2);
     }
+    */
 
     void OnTriggerEnter(Collider other)
     {
         // Player reached trigger dest, can do animation here
         startFlag = false;
         destReached = true;
-        // GetComponent<SOneMovement>().enabled = false;
-        
+        friendAnimator.SetInteger("Current State", 1);
+        victimAnimator.SetInteger("Current State", 1);
+        // StartCoroutine(ExecuteAfterTime(5));
+
     }
 
     public void OnGazeClick()
@@ -117,6 +136,7 @@ public class SOneMovement : MonoBehaviour {
         print("Show fight scene");
         if (!showMenu)
         {
+            friendAnimator.SetInteger("Current State", 2);
             fadeMenu = true;
             // StartCoroutine(ExecuteAfterTime(5));
         }
