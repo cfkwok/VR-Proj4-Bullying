@@ -1,0 +1,119 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class SOneMovement : MonoBehaviour {
+	public GameObject player;
+    public float speed = 0.1f;
+
+    //private CardboardHead head = null;
+    private GameObject head;
+    private CanvasGroup panelGroup;
+    private Vector3 dest = new Vector3(0, 0, 0);
+    private bool started = false;
+    private bool startFlag = false;
+    private bool destReached = false;
+    private bool showMenu = false;
+    private bool fadeMenu = false;
+    private Button opt1;
+    private Button opt2;
+    float smooth = 2.0F;
+    float tiltAngle = 30.0F;
+
+    // Use this for initialization
+    void Start () {
+		//head = Camera.main.GetComponent<StereoController>().Head;
+        head = GameObject.Find("CardboardMain/Head");
+        panelGroup = GameObject.Find("QuestionMenu").GetComponent<CanvasGroup>();
+        dest = new Vector3(player.transform.position.x, player.transform.position.y, -3.0f);
+        opt1 = GameObject.Find("Button1").GetComponent<Button>();
+        opt2 = GameObject.Find("Button2").GetComponent<Button>();
+        disableMenu();
+    }
+    
+    void Update()
+    {
+        float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
+        float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
+        Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
+        //transform.Rotate(Vector3.forward, Time.deltaTime * smooth);
+        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
+        if (Cardboard.SDK.Triggered && !started)
+        {
+            startFlag = true;
+            started = true;
+        }
+        if (startFlag)
+        {
+            player.transform.position = Vector3.Lerp(player.transform.position, dest, speed * Time.deltaTime);
+        }
+        if (showMenu && !fadeMenu)
+        {
+            enableMenu();
+        }
+        if (fadeMenu && !showMenu)
+        {
+            disableMenu();
+        }
+           
+    }
+
+    void enableMenu()
+    {
+        panelGroup.alpha += 0.5f * Time.deltaTime;
+        opt1.interactable = true;
+        opt2.interactable = true;
+        if (panelGroup.alpha == 1f)
+        {
+            showMenu = false;
+        }
+    }
+
+    void disableMenu()
+    {
+        panelGroup.alpha -= 0.5f * Time.deltaTime;
+        opt1.interactable = false;
+        opt2.interactable = false;
+        if (panelGroup.alpha == 0f)
+        {
+            fadeMenu = false;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        // Player reached trigger dest, can do animation here
+        startFlag = false;
+        destReached = true;
+        // GetComponent<SOneMovement>().enabled = false;
+        
+    }
+
+    public void OnGazeClick()
+    {
+        if (destReached && !fadeMenu)
+        {
+            print("Perform actions");
+            showMenu = true;
+        }
+    }
+
+    public void onFight()
+    {
+        print("Show fight scene");
+        if (!showMenu)
+        {
+            fadeMenu = true;
+        }
+    }
+
+    public void onNotFight()
+    {
+        print("Continue bully scene");
+        if (!showMenu)
+        {
+            fadeMenu = true;
+        }
+    }
+}
