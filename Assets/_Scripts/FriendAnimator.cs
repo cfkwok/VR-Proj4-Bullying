@@ -7,7 +7,7 @@ public class FriendAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        friendAnimator = GetComponent<Animator>();
+        
 	}
 	
 	// Update is called once per frame
