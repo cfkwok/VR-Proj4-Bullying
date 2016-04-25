@@ -10,6 +10,9 @@ public class SOneMovement : MonoBehaviour {
     //private CardboardHead head = null;
     private GameObject head;
     private GameObject friendObject;
+    private GameObject bullyObject;
+    private MeshRenderer dialogFriend;
+    private MeshRenderer dialogBully;
     private Animator friendAnimator;
     private Animator victimAnimator;
     private Animator bullyAnimator;
@@ -24,7 +27,10 @@ public class SOneMovement : MonoBehaviour {
     private bool question2 = false;
     private bool friendAgree = false;
     private bool victimDowned = false;
+    public bool reachedBully = false;
+    private bool startEngageBully = false;
     private float delayVictimFall = 0f;
+    private bool talkedToBully = false;
 
     private Text textQuestion;
     private Button opt1;
@@ -40,6 +46,7 @@ public class SOneMovement : MonoBehaviour {
         head = GameObject.Find("CardboardMain/Head");
         panelGroup = GameObject.Find("QuestionMenu").GetComponent<CanvasGroup>();
         friendObject = GameObject.Find("Friend");
+        bullyObject = GameObject.Find("Bully");
         dest = new Vector3(player.transform.position.x, player.transform.position.y, -3.0f);
         textQuestion = GameObject.Find("Question").GetComponent<Text>();
         opt1 = GameObject.Find("Button1").GetComponent<Button>();
@@ -49,10 +56,22 @@ public class SOneMovement : MonoBehaviour {
         friendAnimator = GameObject.Find("Friend").GetComponent<Animator>();
         victimAnimator = GameObject.Find("Bullied").GetComponent<Animator>();
         bullyAnimator = GameObject.Find("Bully").GetComponent<Animator>();
+
+        dialogFriend = GameObject.Find("DialogFriend").GetComponent<MeshRenderer>();
+        dialogBully = GameObject.Find("DialogBully").GetComponent<MeshRenderer>();
     }
     
     void Update()
     {
+        //dialogFriend.transform.rotation.Set(dialogFriend.transform.rotation.x, Camera.main.transform.rotation.y, dialogFriend.transform.rotation.z, dialogFriend.transform.rotation.w);
+
+        Vector3 rot = Camera.main.transform.rotation.eulerAngles;
+        rot.x = 0;
+        rot.z = 270;
+        rot.y += 95;
+        dialogFriend.transform.rotation = Quaternion.Euler(rot);
+        dialogBully.transform.rotation = Quaternion.Euler(rot);
+
         float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
         float tiltAroundX = Input.GetAxis("Vertical") * tiltAngle;
         Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
@@ -62,9 +81,23 @@ public class SOneMovement : MonoBehaviour {
             startFlag = true;
             started = true;
         }
-        if (startFlag)
+        if (startFlag || (startEngageBully && !reachedBully))
         {
             player.transform.position = Vector3.Lerp(player.transform.position, dest, speed * Time.deltaTime);
+        }
+        if (reachedBully && !talkedToBully)
+        {
+            dialogBully.enabled = true;
+            // bullyAnimator.SetInteger("Current State", 3);
+            // Rotate the bully to face user
+            bullyObject.transform.Rotate(Vector3.down * Time.deltaTime * 100.0f);
+            if (bullyObject.transform.eulerAngles.y <= 200)
+            {
+                talkedToBully = true;
+                bullyAnimator.SetInteger("Current State", 0);
+                changeQuestion("Do you want to interfere?", "Yes", "No");
+                // Make char glow to click on trigger
+            }
         }
         if (friendRotate)
         {
@@ -77,6 +110,7 @@ public class SOneMovement : MonoBehaviour {
                 friendAnimator.SetInteger("Current State", 2);
                 changeQuestion("Do you want to interfere?", "Yes", "No");
                 // Make char glow to click on trigger
+                dialogFriend.enabled = true;
             }
         }
         if (friendRotateBack)
@@ -86,6 +120,7 @@ public class SOneMovement : MonoBehaviour {
             if (friendObject.transform.eulerAngles.y >= 350)
             {
                 friendRotateBack = false;
+                friendAnimator.SetInteger("Current State", 0);
             }
         }
         if (friendAgree)
@@ -93,10 +128,10 @@ public class SOneMovement : MonoBehaviour {
             if (friendAnimator.GetCurrentAnimatorStateInfo(0).IsName("agreeing"))
             {
                 if (friendAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
-                {
-                    
+                {                    
                     friendRotateBack = true;
                     friendAgree = false;
+                    engageBully();
                 }
             }
         }
@@ -138,6 +173,13 @@ public class SOneMovement : MonoBehaviour {
            
     }
 
+    void engageBully()
+    {
+        startEngageBully = true;
+
+        player.transform.position = Vector3.Lerp(player.transform.position, dest, speed * Time.deltaTime);
+    }
+
     void enableMenu()
     {
         panelGroup.alpha += 1f * Time.deltaTime;
@@ -165,8 +207,7 @@ public class SOneMovement : MonoBehaviour {
     IEnumerator ExecuteAfterTime(float time)
     {
         yield return new WaitForSeconds(time);
-        victimDowned = true;
-        
+        victimDowned = true;        
     }
     
 
@@ -179,6 +220,8 @@ public class SOneMovement : MonoBehaviour {
 
         bullyAnimator.SetInteger("Current State", 1);
         victimAnimator.SetInteger("Current State", 1);
+
+        dialogFriend.enabled = true;
         // StartCoroutine(ExecuteAfterTime(5));
 
     }
@@ -194,6 +237,7 @@ public class SOneMovement : MonoBehaviour {
     {
         if (destReached && !fadeMenu)
         {
+            dialogFriend.enabled = false;
             print("Perform actions");
             showMenu = true;
         }
@@ -210,7 +254,9 @@ public class SOneMovement : MonoBehaviour {
             fadeMenu = true;
             friendRotate = true;
             question1 = false;
+
             
+
             // StartCoroutine(ExecuteAfterTime(5));
         }
         if (question2 && !showMenu)
