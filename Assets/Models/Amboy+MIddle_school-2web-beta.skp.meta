@@ -1,0 +1,1010 @@
+fileFormatVersion: 2
+guid: 5cdab6efb7d29469d9bfed4880eed76d
+timeCreated: 1461264987
+licenseType: Free
+SketchUpImporter:
+  generateBackFace: 0
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f000000400000004100000042000000430000004400000045000000460000004700000048000000490000004a0000004b0000004c0000004d0000004e0000004f000000500000005100000052000000530000005400000055000000560000005700000058000000590000005a0000005b0000005c0000005d0000005e0000005f000000600000006100000062000000630000006400000065000000660000006700000068000000690000006a0000006b0000006c0000006d0000006e0000006f000000700000007100000072000000730000007400000075000000760000007700000078000000790000007a0000007b0000007c0000007d0000007e0000007f000000800000008100000082000000830000008400000085000000860000008700000088000000890000008a0000008b0000008c0000008d0000008e0000008f000000900000009100000092000000930000009400000095000000960000009700000098000000990000009a0000009b0000009c0000009d0000009e0000009f000000a0000000a1000000a2000000a3000000a4000000a5000000a6000000a7000000a8000000a9000000aa000000ab000000ac000000ad000000ae000000af000000b0000000b1000000b2000000b3000000b4000000b5000000b6000000b7000000b8000000b9000000ba000000bb000000bc000000bd000000be000000bf000000c0000000c1000000c2000000c3000000c4000000c5000000c6000000c7000000c8000000c9000000ca000000cb000000cc000000cd000000ce000000cf000000d0000000d1000000d2000000d3000000d4000000d5000000d6000000d7000000d8000000d9000000da000000db000000dc000000dd000000de000000df000000e0000000e1000000e2000000e3000000e4000000e5000000e6000000e7000000e8000000e9000000ea000000eb000000ec000000ed000000ee000000ef000000f0000000f1000000f2000000f3000000f4000000f5000000f6000000f7000000f8000000f9000000fa000000fb000000fc000000fd000000fe000000ff000000000100000101000002010000030100000401000005010000060100000701000008010000090100000a0100000b0100000c0100000d0100000e0100000f010000100100001101000012010000130100001401000015010000160100001701000018010000190100001a0100001b0100001c0100001d0100001e0100001f010000200100002101000022010000230100002401000025010000260100002701000028010000290100002a0100002b0100002c0100002d0100002e0100002f010000300100003101000032010000330100003401000035010000360100003701000038010000390100003a0100003b0100003c0100003d0100003e0100003f010000400100004101000042010000430100004401000045010000460100004701000048010000490100004a0100004b0100004c0100004d0100004e0100004f010000500100005101000052010000530100005401000055010000560100005701000058010000590100005a0100005b0100005c0100005d0100005e0100005f010000600100006101000062010000630100006401000065010000660100006701000068010000690100006a0100006b0100006c0100006d0100006e0100006f010000700100007101000072010000730100007401000075010000760100007701000078010000790100007a0100007b0100007c0100007d0100007e0100007f010000800100008101000082010000830100008401000085010000860100008701000088010000890100008a0100008b0100008c0100008d0100008e0100008f010000900100009101000092010000930100009401000095010000960100009701000098010000990100009a0100009b0100009c0100009d0100009e0100009f010000a0010000a1010000a2010000a3010000a4010000a5010000a6010000a7010000a8010000a9010000aa010000ab010000ac010000ad010000ae010000af010000b0010000b1010000b2010000b3010000b4010000
+  assetHash:
+    serializedVersion: 2
+    Hash: 4b3dd1da46324d38f36cbf94e1c55860
+  longitude: -105.283
+  latitude: 40.017
+  northCorrection: -0
+  fileUnit: 0
+  sketchUpImportData:
+    defaultCamera:
+      position: {x: -75.19154, y: 11.210545, z: 71.86323}
+      lookAt: {x: -55.391342, y: -4.9244127, z: 10.716947}
+      up: {x: 0.07501016, y: 0.9699045, z: -0.2316437}
+      fov: 79.21169
+      aspectRatio: 0
+      orthoSize: 1
+      isPerspective: 1
+    scenes: []
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: door-coiling_01
+    100004: door-coiling_01 1
+    100006: door-coiling_01 2
+    100008: door-coiling_01 3
+    100010: door_01
+    100012: door_01 1
+    100014: door_01 2
+    100016: door_01 3
+    100018: door_01 4
+    100020: door_02
+    100022: door_02 1
+    100024: door_02 2
+    100026: door_02 3
+    100028: door_02 4
+    100030: door_03
+    100032: Door_04
+    100034: Door_04 1
+    100036: Door_04 2
+    100038: Door_04 3
+    100040: Door_04 4
+    100042: Door_04 5
+    100044: Door_05
+    100046: Door_05 1
+    100048: Door_05 2
+    100050: Door_05 3
+    100052: Door_05 4
+    100054: door_10
+    100056: door_10 1
+    100058: Group 11
+    100060: Group 115
+    100062: Group 117
+    100064: Group 13
+    100066: Group 15
+    100068: Group 17
+    100070: Group 19
+    100072: Group 2
+    100074: Group 21
+    100076: Group 23
+    100078: Group 25
+    100080: Group 27
+    100082: Group 29
+    100084: Group 3
+    100086: Group 31
+    100088: Group 33
+    100090: Group 341
+    100092: Group 343
+    100094: Group 345
+    100096: Group 347
+    100098: Group 35
+    100100: Group 351
+    100102: Group 353
+    100104: Group 355
+    100106: Group 357
+    100108: Group 361
+    100110: Group 363
+    100112: Group 365
+    100114: Group 367
+    100116: Group 37
+    100118: Group 371
+    100120: Group 373
+    100122: Group 375
+    100124: Group 377
+    100126: Group 381
+    100128: Group 383
+    100130: Group 385
+    100132: Group 387
+    100134: Group 39
+    100136: Group 41
+    100138: Group 43
+    100140: Group 45
+    100142: Group 47
+    100144: Group 49
+    100146: Group 5
+    100148: Group 51
+    100150: Group 53
+    100152: Group 55
+    100154: Group 57
+    100156: Group 59
+    100158: Group 61
+    100160: Group 63
+    100162: Group 65
+    100164: Group 67
+    100166: Group 7
+    100168: Group 9
+    100170: hall
+    100172: model-donspout-spine-east
+    100174: model-donspout-spine-east 1
+    100176: model-donspout-spine-east 2
+    100178: model-donspout-spine-east 3
+    100180: model-donspout-spine-east#1
+    100182: model-donspout-spine-west
+    100184: model-donspout-spine-west#1
+    100186: model-donspout-spine-west#1 1
+    100188: model-donspout-spine-west#2
+    100190: model-donspout-spine-west#3
+    100192: model-donspout-spine-west#4
+    100194: model-donspout-spine-west#4 1
+    100196: model-donspout-spine-west#4 2
+    100198: model-donspout-spine-west#4 3
+    100200: model-donspout-spine-west#4 4
+    100202: model_colum_01
+    100204: model_colum_01 1
+    100206: model_colum_01 2
+    100208: model_colum_01 3
+    100210: model_colum_01 4
+    100212: model_colum_01 5
+    100214: model_log-beam
+    100216: model_log-beam 1
+    100218: model_log-truss
+    100220: model_log-truss 1
+    100222: model_log-truss 2
+    100224: model_log-truss 3
+    100226: model_log-truss 4
+    100228: TRUSS_A
+    100230: TRUSS_A 1
+    100232: TRUSS_A 2
+    100234: TRUSS_A 3
+    100236: TRUSS_A 4
+    100238: TRUSS_A 5
+    100240: TRUSS_A 6
+    100242: TRUSS_A 7
+    100244: TRUSS_B
+    100246: TRUSS_B 1
+    100248: TRUSS_B 2
+    100250: TRUSS_B 3
+    100252: TRUSS_B 4
+    100254: TRUSS_B 5
+    100256: TRUSS_B 6
+    100258: TRUSS_B 7
+    100260: window-truss-s
+    100262: window-truss-s 1
+    100264: window_003
+    100266: window_003 1
+    100268: window_003 10
+    100270: window_003 11
+    100272: window_003 2
+    100274: window_003 3
+    100276: window_003 4
+    100278: window_003 5
+    100280: window_003 6
+    100282: window_003 7
+    100284: window_003 8
+    100286: window_003 9
+    100288: window_01
+    100290: window_01 1
+    100292: window_01 2
+    100294: window_01 3
+    100296: window_01 4
+    100298: window_04
+    100300: window_04 1
+    100302: window_04 2
+    100304: window_04 3
+    100306: window_05
+    100308: window_05 1
+    100310: window_05 2
+    100312: window_06
+    100314: window_06 1
+    100316: window_06 2
+    100318: window_06 3
+    100320: window_06 4
+    100322: window_06 5
+    100324: window_08
+    100326: window_08 1
+    100328: window_08 10
+    100330: window_08 11
+    100332: window_08 12
+    100334: window_08 13
+    100336: window_08 14
+    100338: window_08 15
+    100340: window_08 16
+    100342: window_08 17
+    100344: window_08 18
+    100346: window_08 19
+    100348: window_08 2
+    100350: window_08 20
+    100352: window_08 21
+    100354: window_08 22
+    100356: window_08 23
+    100358: window_08 24
+    100360: window_08 25
+    100362: window_08 26
+    100364: window_08 27
+    100366: window_08 28
+    100368: window_08 29
+    100370: window_08 3
+    100372: window_08 30
+    100374: window_08 31
+    100376: window_08 32
+    100378: window_08 33
+    100380: window_08 34
+    100382: window_08 35
+    100384: window_08 36
+    100386: window_08 37
+    100388: window_08 38
+    100390: window_08 39
+    100392: window_08 4
+    100394: window_08 40
+    100396: window_08 41
+    100398: window_08 42
+    100400: window_08 43
+    100402: window_08 44
+    100404: window_08 5
+    100406: window_08 6
+    100408: window_08 7
+    100410: window_08 8
+    100412: window_08 9
+    100414: window_09
+    100416: window_2nd-001
+    100418: window_2nd-001 1
+    100420: window_2nd-001 10
+    100422: window_2nd-001 2
+    100424: window_2nd-001 3
+    100426: window_2nd-001 4
+    100428: window_2nd-001 5
+    100430: window_2nd-001 6
+    100432: window_2nd-001 7
+    100434: window_2nd-001 8
+    100436: window_2nd-001 9
+    400000: //RootNode
+    400002: door-coiling_01
+    400004: door-coiling_01 1
+    400006: door-coiling_01 2
+    400008: door-coiling_01 3
+    400010: door_01
+    400012: door_01 1
+    400014: door_01 2
+    400016: door_01 3
+    400018: door_01 4
+    400020: door_02
+    400022: door_02 1
+    400024: door_02 2
+    400026: door_02 3
+    400028: door_02 4
+    400030: door_03
+    400032: Door_04
+    400034: Door_04 1
+    400036: Door_04 2
+    400038: Door_04 3
+    400040: Door_04 4
+    400042: Door_04 5
+    400044: Door_05
+    400046: Door_05 1
+    400048: Door_05 2
+    400050: Door_05 3
+    400052: Door_05 4
+    400054: door_10
+    400056: door_10 1
+    400058: Group 11
+    400060: Group 115
+    400062: Group 117
+    400064: Group 13
+    400066: Group 15
+    400068: Group 17
+    400070: Group 19
+    400072: Group 2
+    400074: Group 21
+    400076: Group 23
+    400078: Group 25
+    400080: Group 27
+    400082: Group 29
+    400084: Group 3
+    400086: Group 31
+    400088: Group 33
+    400090: Group 341
+    400092: Group 343
+    400094: Group 345
+    400096: Group 347
+    400098: Group 35
+    400100: Group 351
+    400102: Group 353
+    400104: Group 355
+    400106: Group 357
+    400108: Group 361
+    400110: Group 363
+    400112: Group 365
+    400114: Group 367
+    400116: Group 37
+    400118: Group 371
+    400120: Group 373
+    400122: Group 375
+    400124: Group 377
+    400126: Group 381
+    400128: Group 383
+    400130: Group 385
+    400132: Group 387
+    400134: Group 39
+    400136: Group 41
+    400138: Group 43
+    400140: Group 45
+    400142: Group 47
+    400144: Group 49
+    400146: Group 5
+    400148: Group 51
+    400150: Group 53
+    400152: Group 55
+    400154: Group 57
+    400156: Group 59
+    400158: Group 61
+    400160: Group 63
+    400162: Group 65
+    400164: Group 67
+    400166: Group 7
+    400168: Group 9
+    400170: hall
+    400172: model-donspout-spine-east
+    400174: model-donspout-spine-east 1
+    400176: model-donspout-spine-east 2
+    400178: model-donspout-spine-east 3
+    400180: model-donspout-spine-east#1
+    400182: model-donspout-spine-west
+    400184: model-donspout-spine-west#1
+    400186: model-donspout-spine-west#1 1
+    400188: model-donspout-spine-west#2
+    400190: model-donspout-spine-west#3
+    400192: model-donspout-spine-west#4
+    400194: model-donspout-spine-west#4 1
+    400196: model-donspout-spine-west#4 2
+    400198: model-donspout-spine-west#4 3
+    400200: model-donspout-spine-west#4 4
+    400202: model_colum_01
+    400204: model_colum_01 1
+    400206: model_colum_01 2
+    400208: model_colum_01 3
+    400210: model_colum_01 4
+    400212: model_colum_01 5
+    400214: model_log-beam
+    400216: model_log-beam 1
+    400218: model_log-truss
+    400220: model_log-truss 1
+    400222: model_log-truss 2
+    400224: model_log-truss 3
+    400226: model_log-truss 4
+    400228: TRUSS_A
+    400230: TRUSS_A 1
+    400232: TRUSS_A 2
+    400234: TRUSS_A 3
+    400236: TRUSS_A 4
+    400238: TRUSS_A 5
+    400240: TRUSS_A 6
+    400242: TRUSS_A 7
+    400244: TRUSS_B
+    400246: TRUSS_B 1
+    400248: TRUSS_B 2
+    400250: TRUSS_B 3
+    400252: TRUSS_B 4
+    400254: TRUSS_B 5
+    400256: TRUSS_B 6
+    400258: TRUSS_B 7
+    400260: window-truss-s
+    400262: window-truss-s 1
+    400264: window_003
+    400266: window_003 1
+    400268: window_003 10
+    400270: window_003 11
+    400272: window_003 2
+    400274: window_003 3
+    400276: window_003 4
+    400278: window_003 5
+    400280: window_003 6
+    400282: window_003 7
+    400284: window_003 8
+    400286: window_003 9
+    400288: window_01
+    400290: window_01 1
+    400292: window_01 2
+    400294: window_01 3
+    400296: window_01 4
+    400298: window_04
+    400300: window_04 1
+    400302: window_04 2
+    400304: window_04 3
+    400306: window_05
+    400308: window_05 1
+    400310: window_05 2
+    400312: window_06
+    400314: window_06 1
+    400316: window_06 2
+    400318: window_06 3
+    400320: window_06 4
+    400322: window_06 5
+    400324: window_08
+    400326: window_08 1
+    400328: window_08 10
+    400330: window_08 11
+    400332: window_08 12
+    400334: window_08 13
+    400336: window_08 14
+    400338: window_08 15
+    400340: window_08 16
+    400342: window_08 17
+    400344: window_08 18
+    400346: window_08 19
+    400348: window_08 2
+    400350: window_08 20
+    400352: window_08 21
+    400354: window_08 22
+    400356: window_08 23
+    400358: window_08 24
+    400360: window_08 25
+    400362: window_08 26
+    400364: window_08 27
+    400366: window_08 28
+    400368: window_08 29
+    400370: window_08 3
+    400372: window_08 30
+    400374: window_08 31
+    400376: window_08 32
+    400378: window_08 33
+    400380: window_08 34
+    400382: window_08 35
+    400384: window_08 36
+    400386: window_08 37
+    400388: window_08 38
+    400390: window_08 39
+    400392: window_08 4
+    400394: window_08 40
+    400396: window_08 41
+    400398: window_08 42
+    400400: window_08 43
+    400402: window_08 44
+    400404: window_08 5
+    400406: window_08 6
+    400408: window_08 7
+    400410: window_08 8
+    400412: window_08 9
+    400414: window_09
+    400416: window_2nd-001
+    400418: window_2nd-001 1
+    400420: window_2nd-001 10
+    400422: window_2nd-001 2
+    400424: window_2nd-001 3
+    400426: window_2nd-001 4
+    400428: window_2nd-001 5
+    400430: window_2nd-001 6
+    400432: window_2nd-001 7
+    400434: window_2nd-001 8
+    400436: window_2nd-001 9
+    2300000: //RootNode
+    2300002: door-coiling_01
+    2300004: door-coiling_01 1
+    2300006: door-coiling_01 2
+    2300008: door-coiling_01 3
+    2300010: door_01
+    2300012: door_01 1
+    2300014: door_01 2
+    2300016: door_01 3
+    2300018: door_01 4
+    2300020: door_02
+    2300022: door_02 1
+    2300024: door_02 2
+    2300026: door_02 3
+    2300028: door_02 4
+    2300030: door_03
+    2300032: Door_04
+    2300034: Door_04 1
+    2300036: Door_04 2
+    2300038: Door_04 3
+    2300040: Door_04 4
+    2300042: Door_04 5
+    2300044: Door_05
+    2300046: Door_05 1
+    2300048: Door_05 2
+    2300050: Door_05 3
+    2300052: Door_05 4
+    2300054: door_10
+    2300056: door_10 1
+    2300058: Group 11
+    2300060: Group 115
+    2300062: Group 117
+    2300064: Group 13
+    2300066: Group 15
+    2300068: Group 17
+    2300070: Group 19
+    2300072: Group 21
+    2300074: Group 23
+    2300076: Group 25
+    2300078: Group 27
+    2300080: Group 29
+    2300082: Group 3
+    2300084: Group 31
+    2300086: Group 33
+    2300088: Group 341
+    2300090: Group 343
+    2300092: Group 345
+    2300094: Group 347
+    2300096: Group 35
+    2300098: Group 351
+    2300100: Group 353
+    2300102: Group 355
+    2300104: Group 357
+    2300106: Group 361
+    2300108: Group 363
+    2300110: Group 365
+    2300112: Group 367
+    2300114: Group 37
+    2300116: Group 371
+    2300118: Group 373
+    2300120: Group 375
+    2300122: Group 377
+    2300124: Group 381
+    2300126: Group 383
+    2300128: Group 385
+    2300130: Group 387
+    2300132: Group 39
+    2300134: Group 41
+    2300136: Group 43
+    2300138: Group 45
+    2300140: Group 47
+    2300142: Group 49
+    2300144: Group 5
+    2300146: Group 51
+    2300148: Group 53
+    2300150: Group 55
+    2300152: Group 57
+    2300154: Group 59
+    2300156: Group 61
+    2300158: Group 63
+    2300160: Group 65
+    2300162: Group 67
+    2300164: Group 7
+    2300166: Group 9
+    2300168: hall
+    2300170: model-donspout-spine-east
+    2300172: model-donspout-spine-east 1
+    2300174: model-donspout-spine-east 2
+    2300176: model-donspout-spine-east 3
+    2300178: model-donspout-spine-east#1
+    2300180: model-donspout-spine-west
+    2300182: model-donspout-spine-west#1
+    2300184: model-donspout-spine-west#1 1
+    2300186: model-donspout-spine-west#2
+    2300188: model-donspout-spine-west#3
+    2300190: model-donspout-spine-west#4
+    2300192: model-donspout-spine-west#4 1
+    2300194: model-donspout-spine-west#4 2
+    2300196: model-donspout-spine-west#4 3
+    2300198: model-donspout-spine-west#4 4
+    2300200: model_colum_01
+    2300202: model_colum_01 1
+    2300204: model_colum_01 2
+    2300206: model_colum_01 3
+    2300208: model_colum_01 4
+    2300210: model_colum_01 5
+    2300212: model_log-beam
+    2300214: model_log-beam 1
+    2300216: model_log-truss
+    2300218: model_log-truss 1
+    2300220: model_log-truss 2
+    2300222: model_log-truss 3
+    2300224: model_log-truss 4
+    2300226: TRUSS_A
+    2300228: TRUSS_A 1
+    2300230: TRUSS_A 2
+    2300232: TRUSS_A 3
+    2300234: TRUSS_A 4
+    2300236: TRUSS_A 5
+    2300238: TRUSS_A 6
+    2300240: TRUSS_A 7
+    2300242: TRUSS_B
+    2300244: TRUSS_B 1
+    2300246: TRUSS_B 2
+    2300248: TRUSS_B 3
+    2300250: TRUSS_B 4
+    2300252: TRUSS_B 5
+    2300254: TRUSS_B 6
+    2300256: TRUSS_B 7
+    2300258: window-truss-s
+    2300260: window-truss-s 1
+    2300262: window_003
+    2300264: window_003 1
+    2300266: window_003 10
+    2300268: window_003 11
+    2300270: window_003 2
+    2300272: window_003 3
+    2300274: window_003 4
+    2300276: window_003 5
+    2300278: window_003 6
+    2300280: window_003 7
+    2300282: window_003 8
+    2300284: window_003 9
+    2300286: window_01
+    2300288: window_01 1
+    2300290: window_01 2
+    2300292: window_01 3
+    2300294: window_01 4
+    2300296: window_04
+    2300298: window_04 1
+    2300300: window_04 2
+    2300302: window_04 3
+    2300304: window_05
+    2300306: window_05 1
+    2300308: window_05 2
+    2300310: window_06
+    2300312: window_06 1
+    2300314: window_06 2
+    2300316: window_06 3
+    2300318: window_06 4
+    2300320: window_06 5
+    2300322: window_08
+    2300324: window_08 1
+    2300326: window_08 10
+    2300328: window_08 11
+    2300330: window_08 12
+    2300332: window_08 13
+    2300334: window_08 14
+    2300336: window_08 15
+    2300338: window_08 16
+    2300340: window_08 17
+    2300342: window_08 18
+    2300344: window_08 19
+    2300346: window_08 2
+    2300348: window_08 20
+    2300350: window_08 21
+    2300352: window_08 22
+    2300354: window_08 23
+    2300356: window_08 24
+    2300358: window_08 25
+    2300360: window_08 26
+    2300362: window_08 27
+    2300364: window_08 28
+    2300366: window_08 29
+    2300368: window_08 3
+    2300370: window_08 30
+    2300372: window_08 31
+    2300374: window_08 32
+    2300376: window_08 33
+    2300378: window_08 34
+    2300380: window_08 35
+    2300382: window_08 36
+    2300384: window_08 37
+    2300386: window_08 38
+    2300388: window_08 39
+    2300390: window_08 4
+    2300392: window_08 40
+    2300394: window_08 41
+    2300396: window_08 42
+    2300398: window_08 43
+    2300400: window_08 44
+    2300402: window_08 5
+    2300404: window_08 6
+    2300406: window_08 7
+    2300408: window_08 8
+    2300410: window_08 9
+    2300412: window_09
+    2300414: window_2nd-001
+    2300416: window_2nd-001 1
+    2300418: window_2nd-001 10
+    2300420: window_2nd-001 2
+    2300422: window_2nd-001 3
+    2300424: window_2nd-001 4
+    2300426: window_2nd-001 5
+    2300428: window_2nd-001 6
+    2300430: window_2nd-001 7
+    2300432: window_2nd-001 8
+    2300434: window_2nd-001 9
+    3300000: //RootNode
+    3300002: door-coiling_01
+    3300004: door-coiling_01 1
+    3300006: door-coiling_01 2
+    3300008: door-coiling_01 3
+    3300010: door_01
+    3300012: door_01 1
+    3300014: door_01 2
+    3300016: door_01 3
+    3300018: door_01 4
+    3300020: door_02
+    3300022: door_02 1
+    3300024: door_02 2
+    3300026: door_02 3
+    3300028: door_02 4
+    3300030: door_03
+    3300032: Door_04
+    3300034: Door_04 1
+    3300036: Door_04 2
+    3300038: Door_04 3
+    3300040: Door_04 4
+    3300042: Door_04 5
+    3300044: Door_05
+    3300046: Door_05 1
+    3300048: Door_05 2
+    3300050: Door_05 3
+    3300052: Door_05 4
+    3300054: door_10
+    3300056: door_10 1
+    3300058: Group 11
+    3300060: Group 115
+    3300062: Group 117
+    3300064: Group 13
+    3300066: Group 15
+    3300068: Group 17
+    3300070: Group 19
+    3300072: Group 21
+    3300074: Group 23
+    3300076: Group 25
+    3300078: Group 27
+    3300080: Group 29
+    3300082: Group 3
+    3300084: Group 31
+    3300086: Group 33
+    3300088: Group 341
+    3300090: Group 343
+    3300092: Group 345
+    3300094: Group 347
+    3300096: Group 35
+    3300098: Group 351
+    3300100: Group 353
+    3300102: Group 355
+    3300104: Group 357
+    3300106: Group 361
+    3300108: Group 363
+    3300110: Group 365
+    3300112: Group 367
+    3300114: Group 37
+    3300116: Group 371
+    3300118: Group 373
+    3300120: Group 375
+    3300122: Group 377
+    3300124: Group 381
+    3300126: Group 383
+    3300128: Group 385
+    3300130: Group 387
+    3300132: Group 39
+    3300134: Group 41
+    3300136: Group 43
+    3300138: Group 45
+    3300140: Group 47
+    3300142: Group 49
+    3300144: Group 5
+    3300146: Group 51
+    3300148: Group 53
+    3300150: Group 55
+    3300152: Group 57
+    3300154: Group 59
+    3300156: Group 61
+    3300158: Group 63
+    3300160: Group 65
+    3300162: Group 67
+    3300164: Group 7
+    3300166: Group 9
+    3300168: hall
+    3300170: model-donspout-spine-east
+    3300172: model-donspout-spine-east 1
+    3300174: model-donspout-spine-east 2
+    3300176: model-donspout-spine-east 3
+    3300178: model-donspout-spine-east#1
+    3300180: model-donspout-spine-west
+    3300182: model-donspout-spine-west#1
+    3300184: model-donspout-spine-west#1 1
+    3300186: model-donspout-spine-west#2
+    3300188: model-donspout-spine-west#3
+    3300190: model-donspout-spine-west#4
+    3300192: model-donspout-spine-west#4 1
+    3300194: model-donspout-spine-west#4 2
+    3300196: model-donspout-spine-west#4 3
+    3300198: model-donspout-spine-west#4 4
+    3300200: model_colum_01
+    3300202: model_colum_01 1
+    3300204: model_colum_01 2
+    3300206: model_colum_01 3
+    3300208: model_colum_01 4
+    3300210: model_colum_01 5
+    3300212: model_log-beam
+    3300214: model_log-beam 1
+    3300216: model_log-truss
+    3300218: model_log-truss 1
+    3300220: model_log-truss 2
+    3300222: model_log-truss 3
+    3300224: model_log-truss 4
+    3300226: TRUSS_A
+    3300228: TRUSS_A 1
+    3300230: TRUSS_A 2
+    3300232: TRUSS_A 3
+    3300234: TRUSS_A 4
+    3300236: TRUSS_A 5
+    3300238: TRUSS_A 6
+    3300240: TRUSS_A 7
+    3300242: TRUSS_B
+    3300244: TRUSS_B 1
+    3300246: TRUSS_B 2
+    3300248: TRUSS_B 3
+    3300250: TRUSS_B 4
+    3300252: TRUSS_B 5
+    3300254: TRUSS_B 6
+    3300256: TRUSS_B 7
+    3300258: window-truss-s
+    3300260: window-truss-s 1
+    3300262: window_003
+    3300264: window_003 1
+    3300266: window_003 10
+    3300268: window_003 11
+    3300270: window_003 2
+    3300272: window_003 3
+    3300274: window_003 4
+    3300276: window_003 5
+    3300278: window_003 6
+    3300280: window_003 7
+    3300282: window_003 8
+    3300284: window_003 9
+    3300286: window_01
+    3300288: window_01 1
+    3300290: window_01 2
+    3300292: window_01 3
+    3300294: window_01 4
+    3300296: window_04
+    3300298: window_04 1
+    3300300: window_04 2
+    3300302: window_04 3
+    3300304: window_05
+    3300306: window_05 1
+    3300308: window_05 2
+    3300310: window_06
+    3300312: window_06 1
+    3300314: window_06 2
+    3300316: window_06 3
+    3300318: window_06 4
+    3300320: window_06 5
+    3300322: window_08
+    3300324: window_08 1
+    3300326: window_08 10
+    3300328: window_08 11
+    3300330: window_08 12
+    3300332: window_08 13
+    3300334: window_08 14
+    3300336: window_08 15
+    3300338: window_08 16
+    3300340: window_08 17
+    3300342: window_08 18
+    3300344: window_08 19
+    3300346: window_08 2
+    3300348: window_08 20
+    3300350: window_08 21
+    3300352: window_08 22
+    3300354: window_08 23
+    3300356: window_08 24
+    3300358: window_08 25
+    3300360: window_08 26
+    3300362: window_08 27
+    3300364: window_08 28
+    3300366: window_08 29
+    3300368: window_08 3
+    3300370: window_08 30
+    3300372: window_08 31
+    3300374: window_08 32
+    3300376: window_08 33
+    3300378: window_08 34
+    3300380: window_08 35
+    3300382: window_08 36
+    3300384: window_08 37
+    3300386: window_08 38
+    3300388: window_08 39
+    3300390: window_08 4
+    3300392: window_08 40
+    3300394: window_08 41
+    3300396: window_08 42
+    3300398: window_08 43
+    3300400: window_08 44
+    3300402: window_08 5
+    3300404: window_08 6
+    3300406: window_08 7
+    3300408: window_08 8
+    3300410: window_08 9
+    3300412: window_09
+    3300414: window_2nd-001
+    3300416: window_2nd-001 1
+    3300418: window_2nd-001 10
+    3300420: window_2nd-001 2
+    3300422: window_2nd-001 3
+    3300424: window_2nd-001 4
+    3300426: window_2nd-001 5
+    3300428: window_2nd-001 6
+    3300430: window_2nd-001 7
+    3300432: window_2nd-001 8
+    3300434: window_2nd-001 9
+    4300000: Mesh Amboy+MIddle_school-2web-beta
+    4300002: Mesh Group 3
+    4300004: Mesh Group 7
+    4300006: Mesh Group 9
+    4300008: Mesh Group 13
+    4300010: Mesh Group 17
+    4300012: Mesh Group 29
+    4300014: Mesh Group 57
+    4300016: Mesh Group 59
+    4300018: Mesh Group 61
+    4300020: Mesh window_2nd-001
+    4300022: Mesh Door_04
+    4300024: Mesh Door_05
+    4300026: Mesh Door_05
+    4300028: Mesh Door_04
+    4300030: Mesh hall
+    4300032: Mesh Group 115
+    4300034: Mesh TRUSS_A
+    4300036: Mesh TRUSS_B
+    4300038: Mesh door-coiling_01
+    4300040: Mesh door_03
+    4300042: Mesh window_003
+    4300044: Mesh door_02
+    4300046: Mesh window_04
+    4300048: Mesh window_05
+    4300050: Mesh window_08
+    4300052: Mesh window-truss-s
+    4300054: Mesh door_01
+    4300056: Mesh window_06
+    4300058: Mesh window_01
+    4300060: Mesh window_09
+    4300062: Mesh door_10
+    4300064: Mesh model_log-truss
+    4300066: Mesh Group 341
+    4300068: Mesh Group 343
+    4300070: Mesh Group 345
+    4300072: Mesh model_colum_01
+    4300074: Mesh model_log-beam
+    4300076: Mesh model-donspout-spine-east
+    4300078: Mesh model-donspout-spine-west
+    4300080: Mesh model-donspout-spine-west#1
+    4300082: Mesh model-donspout-spine-east#1
+    4300084: Mesh model-donspout-spine-west#2
+    4300086: Mesh model-donspout-spine-west#3
+    4300088: Mesh model-donspout-spine-west#4
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
