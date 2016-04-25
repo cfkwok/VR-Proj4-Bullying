@@ -45,10 +45,12 @@ public class SOneMovement : MonoBehaviour {
     private int contBullyCount = 0;
     private SceneFadeInOut sceneFader;
     private bool goSceneTwo;
+    private Text narrativeText;
 
     // Use this for initialization
     void Start () {
-		//head = Camera.main.GetComponent<StereoController>().Head;
+        narrativeText = GameObject.Find("CardboardMain/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
+        //head = Camera.main.GetComponent<StereoController>().Head;
         head = GameObject.Find("CardboardMain/Head");
         panelGroup = GameObject.Find("QuestionMenu").GetComponent<CanvasGroup>();
         friendObject = GameObject.Find("Friend");
@@ -69,12 +71,13 @@ public class SOneMovement : MonoBehaviour {
 
         sceneFader = GameObject.Find("Fader").GetComponent<SceneFadeInOut>();
         // sceneFader.StartScene();
+        // narrativeText.color = Color.clear;
     }
     
     void Update()
     {
         //dialogFriend.transform.rotation.Set(dialogFriend.transform.rotation.x, Camera.main.transform.rotation.y, dialogFriend.transform.rotation.z, dialogFriend.transform.rotation.w);
-
+        // narrativeText.color = Color.Lerp(narrativeText.color, Color.clear, 1.5f * Time.deltaTime);
         Vector3 rot = Camera.main.transform.rotation.eulerAngles;
         rot.x = 0;
         rot.z = 270;
@@ -97,7 +100,7 @@ public class SOneMovement : MonoBehaviour {
         }
         if (reachedBully && !talkedToBully)
         {
-            dialogBully.enabled = true;
+            // dialogBully.enabled = true;
             // bullyAnimator.SetInteger("Current State", 3);
             // Rotate the bully to face user
             bullyObject.transform.Rotate(Vector3.down * Time.deltaTime * 100.0f);
@@ -131,7 +134,7 @@ public class SOneMovement : MonoBehaviour {
                 bullyWalkAway = false;
                 Destroy(bullyObject);
 
-                sceneFader.EndScene(1);
+                goSceneTwo = true;
             }
         }
         if (friendRotate)
@@ -353,8 +356,9 @@ public class SOneMovement : MonoBehaviour {
             
             friendAnimator.SetInteger("Current State", 3);
             fadeMenu = true;
-            friendAgree = true;        
+            friendAgree = true;
             // StartCoroutine(ExecuteAfterTime(5));
+            narrativeText.text = "You temporarily stopped the bully";
         }
     }
     // Question X Choice 2
@@ -373,5 +377,6 @@ public class SOneMovement : MonoBehaviour {
             continueBully = true;
             friendRotateBack = true;
         }
+        narrativeText.text = "You decided not to intervene.";
     }
 }
