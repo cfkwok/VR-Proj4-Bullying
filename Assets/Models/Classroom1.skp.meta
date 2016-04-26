@@ -3021,6 +3021,7 @@ SketchUpImporter:
     2301818: Window_Awning_43.5x26_Opened 3
     2301820: Window_Awning_43.5x26_Opened 4
     2301822: Window_Frame_1
+    2301824: box 1
     3300000: back
     3300002: back 1
     3300004: back 10
@@ -3933,6 +3934,7 @@ SketchUpImporter:
     3301818: Window_Awning_43.5x26_Opened 3
     3301820: Window_Awning_43.5x26_Opened 4
     3301822: Window_Frame_1
+    3301824: box 1
     4300000: Mesh Group 73
     4300002: Mesh Group 75
     4300004: Mesh Computer_Desktop_iMac_DomeBase
