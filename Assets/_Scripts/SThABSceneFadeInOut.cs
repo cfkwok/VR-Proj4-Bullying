@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class SceneFadeInOut : MonoBehaviour
+public class SThABSceneFadeInOut : MonoBehaviour
 {
     public Image FadeImg;
     public float fadeSpeed = 1.5f;
@@ -14,7 +14,7 @@ public class SceneFadeInOut : MonoBehaviour
     private float timeToRead = 5f;
     private Text narrativeText;
     private bool callRoutine = true;
-    private int statsPath = 0;
+    private int statsPath = 1;    
 
     void Awake()
     {
@@ -76,11 +76,11 @@ public class SceneFadeInOut : MonoBehaviour
         // Start fading towards black.
         FadeToBlack();
 
-        if (narrativeText.text.Contains("stopped"))
+        if (narrativeText.text.Contains("talked"))
         {
             statsPath = 1;
         }
-        if (narrativeText.text.Contains("intervene"))
+        if (narrativeText.text.Contains("mind"))
         {
             statsPath = 2;
         }
@@ -94,13 +94,13 @@ public class SceneFadeInOut : MonoBehaviour
                 narrativeText.color = Color.white;
             }
         }
-            
+
 
         if (textInt == 10)
         {
             SceneManager.LoadScene(SceneNumber);
         }
-            
+
     }
 
     IEnumerator ExecuteAfterTime(float time)
@@ -130,34 +130,6 @@ public class SceneFadeInOut : MonoBehaviour
             else if (textInt == 3)
             {
                 narrativeText.text = "Stats say bullies are mean3";
-                textInt++;
-                timeToRead = 2f;
-            }
-        }
-
-        else if (statsPath == 2)
-        {
-            if (textInt == 0)
-            {
-                narrativeText.text = "2Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
-                textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 1)
-            {
-                narrativeText.text = "2Stats say bullies are mean1 Stats say bullies are mean1";
-                textInt++;
-                timeToRead = 10f;
-            }
-            else if (textInt == 2)
-            {
-                narrativeText.text = "2Stats say bullies are mean2";
-                textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 3)
-            {
-                narrativeText.text = "2Stats say bullies are mean3";
                 textInt++;
                 timeToRead = 2f;
             }

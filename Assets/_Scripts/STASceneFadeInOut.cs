@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class SceneFadeInOut : MonoBehaviour
+public class STASceneFadeInOut : MonoBehaviour
 {
     public Image FadeImg;
     public float fadeSpeed = 1.5f;
@@ -14,7 +14,7 @@ public class SceneFadeInOut : MonoBehaviour
     private float timeToRead = 5f;
     private Text narrativeText;
     private bool callRoutine = true;
-    private int statsPath = 0;
+    private int statsPath = 0;    
 
     void Awake()
     {
@@ -76,11 +76,11 @@ public class SceneFadeInOut : MonoBehaviour
         // Start fading towards black.
         FadeToBlack();
 
-        if (narrativeText.text.Contains("stopped"))
+        if (narrativeText.text.Contains("talked"))
         {
             statsPath = 1;
         }
-        if (narrativeText.text.Contains("intervene"))
+        if (narrativeText.text.Contains("mind"))
         {
             statsPath = 2;
         }
@@ -94,13 +94,13 @@ public class SceneFadeInOut : MonoBehaviour
                 narrativeText.color = Color.white;
             }
         }
-            
+
 
         if (textInt == 10)
         {
             SceneManager.LoadScene(SceneNumber);
         }
-            
+
     }
 
     IEnumerator ExecuteAfterTime(float time)
