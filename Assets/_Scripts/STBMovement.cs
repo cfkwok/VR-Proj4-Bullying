@@ -94,10 +94,12 @@ public class STBMovement : MonoBehaviour {
                 bullyRun = false;
                 goHere = player.transform.position;
                 bullyAnimator.SetInteger("Current State", 1);
-                decision.text = "Will you fight back or do nothing?";
+                decision.text = "Will you fight back\nor do nothing?";
                 opt1.GetComponentInChildren<Text>().text = "Fight back";
                 opt2.GetComponentInChildren<Text>().text = "Do nothing";
                 question2 = true;
+                fadeMenu = false;
+                opt2.colors = opt1.colors;
                 playerTurn = true; 
             }
         }
@@ -106,17 +108,15 @@ public class STBMovement : MonoBehaviour {
             if (head.transform.eulerAngles.y < 8 || head.transform.eulerAngles.y > 180)
             {
                 head.GetComponent<CardboardHead>().trackRotation = false;
-                //head.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
                 player.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
             }
             if(head.transform.eulerAngles.y >= 12 && head.transform.eulerAngles.y <= 180)
             {
                 head.GetComponent<CardboardHead>().trackRotation = false;
-               // head.transform.Rotate(Vector3.down * Time.deltaTime * 200.0f);
-                player.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
+                player.transform.Rotate(Vector3.down * Time.deltaTime * 200.0f);
 
             }
-            if (head.transform.eulerAngles.y < 8 && head.transform.eulerAngles.y < 12)
+            if (head.transform.eulerAngles.y > 5 && head.transform.eulerAngles.y <= 13)
             {
                 head.GetComponent<CardboardHead>().trackRotation = true;
                 playerTurn = false;
