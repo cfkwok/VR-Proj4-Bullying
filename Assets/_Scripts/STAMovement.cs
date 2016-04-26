@@ -83,7 +83,7 @@ public class STAMovement : MonoBehaviour {
             {
                 dest.x = victim.transform.position.x - 0.4f;
             }
-            player.transform.position = Vector3.Lerp(player.transform.position, dest, 0.3f * Time.deltaTime);
+            player.transform.position = Vector3.MoveTowards(player.transform.position, dest, 1.2f * Time.deltaTime);
             
             if (player.transform.position.x >= victim.transform.position.x - 0.7f)
             {

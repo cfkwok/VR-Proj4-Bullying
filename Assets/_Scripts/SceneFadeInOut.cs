@@ -18,8 +18,8 @@ public class SceneFadeInOut : MonoBehaviour
 
     void Awake()
     {
-        mainCamRet = GameObject.Find("Character/Head/Main Camera/CardboardReticle");
-        narrativeText = GameObject.Find("Character/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
+        mainCamRet = GameObject.Find("CardboardMain/Head/Main Camera/CardboardReticle");
+        narrativeText = GameObject.Find("CardboardMain/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
         //FadeImg.rectTransform.localScale = new Vector2(Screen.width, Screen.height);
 
         narrativeText.color = Color.clear;
@@ -111,27 +111,20 @@ public class SceneFadeInOut : MonoBehaviour
         {
             if (textInt == 0)
             {
-                narrativeText.text = "Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
-                textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 1)
-            {
-                narrativeText.text = "Stats say bullies are mean1 Stats say bullies are mean1";
+                narrativeText.text = "\"In a 2007 study, 86% of LGBT students said that they had experienced harassment at school during the previous year\"";
                 textInt++;
                 timeToRead = 10f;
             }
+            else if (textInt == 1)
+            {
+                narrativeText.text = "\"DHHS reports that bullying stops within 10 seconds 57 percent of the time when someone intervenes\"";
+                textInt++;
+                timeToRead = 9f;
+            }
             else if (textInt == 2)
             {
-                narrativeText.text = "Stats say bullies are mean2";
-                textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 3)
-            {
-                narrativeText.text = "Stats say bullies are mean3";
-                textInt++;
-                timeToRead = 2f;
+                narrativeText.text = "\"If I say anything, he’ll turn on me next!\" is a common mentality bystanders have.";
+                timeToRead = 8f;
             }
         }
 
@@ -139,27 +132,21 @@ public class SceneFadeInOut : MonoBehaviour
         {
             if (textInt == 0)
             {
-                narrativeText.text = "2Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
-                textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 1)
-            {
-                narrativeText.text = "2Stats say bullies are mean1 Stats say bullies are mean1";
+                narrativeText.text = "\"In a 2007 study, 86% of LGBT students said that they had experienced harassment at school during the previous year\"";
                 textInt++;
                 timeToRead = 10f;
             }
+            else if (textInt == 1)
+            {
+                narrativeText.text = "Most bystanders believe that someone else will take charge, so they take no action.";
+                textInt++;
+                timeToRead = 8f;
+            }
             else if (textInt == 2)
             {
-                narrativeText.text = "2Stats say bullies are mean2";
+                narrativeText.text = "85% of the time, there is no intervention in a bullying situation.";
                 textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 3)
-            {
-                narrativeText.text = "2Stats say bullies are mean3";
-                textInt++;
-                timeToRead = 2f;
+                timeToRead = 8f;
             }
         }
         callRoutine = true;
