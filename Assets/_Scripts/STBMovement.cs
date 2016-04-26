@@ -9,6 +9,7 @@ public class STBMovement : MonoBehaviour {
     public GameObject player;
     private Vector3 goHere;
     private CanvasGroup panelGroup;
+    private GameObject head;
     private GameObject bully;
     private Animator bullyAnimator;
     private Button opt1;
@@ -22,6 +23,7 @@ public class STBMovement : MonoBehaviour {
     private bool bullyRun;
     private bool bullyWalk;
     private bool question1;
+    private bool playerTurn;
     private bool question2;
     private bool question3;
     public GameObject runDestination;
@@ -36,6 +38,7 @@ public class STBMovement : MonoBehaviour {
         bullyAnimator = bully.GetComponent<Animator>();
         bullyWalk = true;
         fadeMenu = false;
+        head = player.transform.FindChild("Head").gameObject;
     }
 
     void Update() {
@@ -70,6 +73,7 @@ public class STBMovement : MonoBehaviour {
             player.transform.Rotate(Vector3.down * Time.deltaTime * 200.0f);
             if (player.transform.eulerAngles.y <= 180)
             {
+                showMenu = true;
                 delayTime = Time.time + 2f;
                 speed = 7;
                 player.GetComponentInChildren<CardboardHead>().trackRotation = true;
@@ -81,9 +85,10 @@ public class STBMovement : MonoBehaviour {
 
         if (bullyRun && delayTime < Time.time)
         {
+            showMenu = false;
+            fadeMenu = true;
             bully.transform.position = Vector3.MoveTowards(bully.transform.position, runDestination.transform.position, speed * Time.deltaTime * 1.3f);
             bully.transform.LookAt(player.transform.FindChild("LookAtPivot").transform);
-            Debug.Log(Vector3.Distance(bully.transform.position, player.transform.position));
             if (Vector3.Distance(bully.transform.position, player.transform.position) < 2.5)
             {
                 bullyRun = false;
@@ -92,32 +97,57 @@ public class STBMovement : MonoBehaviour {
                 decision.text = "Will you fight back or do nothing?";
                 opt1.GetComponentInChildren<Text>().text = "Fight back";
                 opt2.GetComponentInChildren<Text>().text = "Do nothing";
-                question2 = true; 
+                question2 = true;
+                playerTurn = true; 
             }
         }
-        if (question2 && player.transform.eulerAngles.y >= 90)
+        if (playerTurn)
         {
-            player.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
-            player.transform.FindChild("Head").Rotate(Vector3.down * Time.deltaTime * -200.0f); 
-            if (player.transform.eulerAngles.y <= 90)
+            if (head.transform.eulerAngles.y < 8 || head.transform.eulerAngles.y > 180)
             {
+                head.GetComponent<CardboardHead>().trackRotation = false;
+                //head.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
+                player.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
+            }
+            if(head.transform.eulerAngles.y >= 12 && head.transform.eulerAngles.y <= 180)
+            {
+                head.GetComponent<CardboardHead>().trackRotation = false;
+               // head.transform.Rotate(Vector3.down * Time.deltaTime * 200.0f);
+                player.transform.Rotate(Vector3.down * Time.deltaTime * -200.0f);
+
+            }
+            if (head.transform.eulerAngles.y < 8 && head.transform.eulerAngles.y < 12)
+            {
+                head.GetComponent<CardboardHead>().trackRotation = true;
+                playerTurn = false;
                 showMenu = true;
             }
         }
-
-        if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("kick_to_the_groin"))
+        if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("kick_to_the_groin") || bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("shoulder_hit_and_fall"))
         {
-            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
-                bullyAnimator.SetInteger("Current State", 4);
+                bullyAnimator.SetInteger("Current State", 5);
             }
         }
-        Debug.Log(headPos);
+        if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("getting_up"))
+        {
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            {
+                bullyAnimator.SetInteger("Current State", 6);
+            }
+        }
+        if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("zombie_punching"))
+        {
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 3)
+            {
+                bullyAnimator.SetInteger("Current State", 7);
+            }
+        }
     }
 
     void OnTriggerEnter()
     {
-        Debug.Log("Hello?");
         if (!fadeMenu)
         {
             showMenu = true;
@@ -126,11 +156,22 @@ public class STBMovement : MonoBehaviour {
     }
     void enableMenu()
     {
+        if (question1)
+        {
+            var cb = opt2.colors;
+            opt2.interactable = false;
+            cb.disabledColor = new Color(0, 0, 0, 0);
+            opt2.colors = cb;
+        }
         panelGroup.alpha += 1f * Time.deltaTime;
         if (panelGroup.alpha == 1f)
         {
+            if(!question1)
+            {
+                opt2.interactable = true;
+            }
             opt1.interactable = true;
-            opt2.interactable = true;
+            
             showMenu = false;
         }
     }
@@ -143,6 +184,10 @@ public class STBMovement : MonoBehaviour {
         if (panelGroup.alpha == 0f)
         {
             fadeMenu = false;
+            if (question2)
+            {
+                opt2.colors = opt1.colors;
+            }
         }
     }
 
@@ -156,11 +201,19 @@ public class STBMovement : MonoBehaviour {
             fadeMenu = true;
             bullyAnimator.SetInteger("Current State", 2);
         }
+        if (question3)
+        {
+            question3 = false;
+            fadeMenu = true;
+            bullyAnimator.SetInteger("Current State", 3);
+        }
         if (question2)
         {
             question2 = false;
-            fadeMenu = true;
-            bullyAnimator.SetInteger("Current State", 3);
+            question3 = true;
+            decision.text = "Kick or punch?";
+            opt1.GetComponentInChildren<Text>().text = "kick";
+            opt2.GetComponentInChildren<Text>().text = "Punch";
         }
     }
     // Question X Choice 2
@@ -168,8 +221,20 @@ public class STBMovement : MonoBehaviour {
     {
         if (question1)
         {
-            print("Continue bully scene");
+            fadeMenu = true;
             question1 = false;
+        }
+        if (question2)
+        {
+            question2 = false;
+            fadeMenu = true;
+            bullyAnimator.SetInteger("Current State", 6);
+        }
+        if (question3)
+        {
+            question3 = false;
+            fadeMenu = true;
+            bullyAnimator.SetInteger("Current State", 4);
         }
     }
 }
