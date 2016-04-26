@@ -46,6 +46,7 @@ public class SOneMovement : MonoBehaviour {
     private SceneFadeInOut sceneFader;
     private bool goSceneTwo;
     private Text narrativeText;
+    private bool enableFriendDialog;
 
     // Use this for initialization
     void Start () {
@@ -104,6 +105,7 @@ public class SOneMovement : MonoBehaviour {
             // bullyAnimator.SetInteger("Current State", 3);
             // Rotate the bully to face user
             bullyObject.transform.Rotate(Vector3.down * Time.deltaTime * 100.0f);
+            bullyAnimator.SetInteger("Current State", 3);
             if (bullyObject.transform.eulerAngles.y <= 185)
             {
                 talkedToBully = true;
@@ -129,6 +131,7 @@ public class SOneMovement : MonoBehaviour {
             
             Vector3 tmp = new Vector3(bullyObject.transform.position.x, bullyObject.transform.position.y, -25f);
             bullyObject.transform.position = Vector3.Lerp(bullyObject.transform.position, tmp, speed * Time.deltaTime);
+            bullyAnimator.SetInteger("Current State", 3);
             if (bullyObject.transform.position.z <= -20f)
             {
                 bullyWalkAway = false;
@@ -148,7 +151,15 @@ public class SOneMovement : MonoBehaviour {
                 friendAnimator.SetInteger("Current State", 2);
                 changeQuestion("Do you want to continue interfering?", "Yes", "No");
                 // Make char glow to click on trigger
+                enableFriendDialog = true;
+            }
+        }
+        if (enableFriendDialog)
+        {
+            if (friendAnimator.GetCurrentAnimatorStateInfo(0).IsName("restrain") && friendAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            {
                 dialogFriend.enabled = true;
+                enableFriendDialog = false;
             }
         }
         if (friendRotateBack)
