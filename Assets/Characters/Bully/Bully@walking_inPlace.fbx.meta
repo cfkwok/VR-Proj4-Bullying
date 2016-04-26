@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b1bd19126c08a894f8a829361d065936
-timeCreated: 1461441693
+guid: b7816c5833e100349a30a9c64bef7dac
+timeCreated: 1461623592
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -141,7 +141,7 @@ ModelImporter:
     400130: mixamorig:Spine
     400132: mixamorig:Spine1
     400134: mixamorig:Spine2
-    7400000: kick_to_the_groin
+    7400000: walking_inPlace
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -165,17 +165,17 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: kick_to_the_groin
+      name: walking_inPlace
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 124
+      lastFrame: 27
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
