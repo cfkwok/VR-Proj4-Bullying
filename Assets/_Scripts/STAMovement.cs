@@ -23,6 +23,8 @@ public class STAMovement : MonoBehaviour {
     private GameObject victim;
     private bool moveToVictim;
     private Text narrativeText;
+    private Text captionTextUI;
+    private string captionText;
     private STASceneFadeInOut sceneFader;
 
     // Use this for initialization
@@ -39,11 +41,16 @@ public class STAMovement : MonoBehaviour {
         victim = GameObject.Find("Bullied");
 
         narrativeText = GameObject.Find("Character/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
+        captionTextUI = GameObject.Find("Character/Head/Main Camera/Fader/Caption").GetComponent<Text>();
         sceneFader = GameObject.Find("Fader").GetComponent<STASceneFadeInOut>();
 
-        print("Classmate1: Hey, I heard that kid got his butt kicked today! Hahaha! Look at him back there crying!");
-        print("Classmates: LOL!");
-        StartCoroutine(StartSceneFlow(5));
+        captionText = ("Classmate1: Hey, I heard that kid got his butt kicked today!");
+        StartCoroutine(ChangeCaptionText(0.3f, captionText));
+        captionText = ("Classmate2: Hahaha! Look at him back there crying!");
+        StartCoroutine(ChangeCaptionText(4f, captionText));
+        captionText = ("");
+        StartCoroutine(ChangeCaptionText(8f, captionText));
+        StartCoroutine(StartSceneFlow(11f));
         
     }
 	
@@ -87,7 +94,10 @@ public class STAMovement : MonoBehaviour {
             
             if (player.transform.position.x >= victim.transform.position.x - 0.7f)
             {
-                print("Victim: Just leave me alone... *sob sob*");
+                captionText = ("Victim: Just leave me alone... *sob sob*");
+                StartCoroutine(ChangeCaptionText(0.3f, captionText));
+                captionText = "";
+                StartCoroutine(ChangeCaptionText(4f, captionText));
                 moveToVictim = false;
                 enableDialog();
                 /*
@@ -171,14 +181,23 @@ public class STAMovement : MonoBehaviour {
         {
             fadeMenu = true;
             disableDialog();
-            print("User: Look, I know you have it rough being picked on because of how you are. " +
-                "Just know that I am on your side, you do not deserve this and I am very willing to " +
-                "lend a hand if you will let me. Let's deal with this together.");
-            print("*Victim picks his head up*");
-            print("Victim: Thank you for your support... QQ");
-            print("User: Remember, you have people you can trust, who you can talk to...");           
+            captionText = ("You: Look, I know you have it rough being picked on because of who you are.");
+            StartCoroutine(ChangeCaptionText(0.3f, captionText));
+            captionText = "Just know that I am on your side, you do not deserve this and I am very willing to";
+            StartCoroutine(ChangeCaptionText(6f, captionText));
+            captionText = "lend a hand if you will let me. Let's deal with this together.";
+            StartCoroutine(ChangeCaptionText(11f, captionText));
+            captionText = "";
+            StartCoroutine(ChangeCaptionText(17f, captionText));
+            // print("*Victim picks his head up*");
+            captionText = ("Victim: Thanks for your help...");
+            StartCoroutine(ChangeCaptionText(19f, captionText));
+            captionText = ("You: Remember, you have people you can trust, who you can talk to...");
+            StartCoroutine(ChangeCaptionText(23f, captionText));
+            captionText = ("");
+            StartCoroutine(ChangeCaptionText(29f, captionText));
             narrativeText.text = "You talked with your classmate and offered support to him in hopes to solve this issue.";
-            goNextScene = true;
+            StartCoroutine(StartNextScene(31f));
         }
     }
     // Question X Choice 2
@@ -221,10 +240,22 @@ public class STAMovement : MonoBehaviour {
         }
     }
 
+    IEnumerator ChangeCaptionText(float time, string textStr)
+    {
+        yield return new WaitForSeconds(time);
+        captionTextUI.text = textStr;
+    }
+
     IEnumerator StartSceneFlow(float time)
     {
         yield return new WaitForSeconds(time);
         enableDialog();
         changeQuestion("Do you want to talk to him?", "Talk", "Don't Talk");
+    }
+
+    IEnumerator StartNextScene(float time)
+    {
+        yield return new WaitForSeconds(time);
+        goNextScene = true;
     }
 }
