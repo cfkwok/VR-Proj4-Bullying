@@ -47,10 +47,10 @@ public class STAMovement : MonoBehaviour {
         captionText = ("Classmate1: Hey, I heard that kid got his butt kicked today!");
         StartCoroutine(ChangeCaptionText(0.3f, captionText));
         captionText = ("Classmate2: Hahaha! Look at him back there crying!");
-        StartCoroutine(ChangeCaptionText(4f, captionText));
+        StartCoroutine(ChangeCaptionText(6f, captionText));
         captionText = ("");
-        StartCoroutine(ChangeCaptionText(8f, captionText));
-        StartCoroutine(StartSceneFlow(11f));
+        StartCoroutine(ChangeCaptionText(15f, captionText));
+        StartCoroutine(StartSceneFlow(15.8f));
         
     }
 	
@@ -94,7 +94,7 @@ public class STAMovement : MonoBehaviour {
             
             if (player.transform.position.x >= victim.transform.position.x - 0.7f)
             {
-                captionText = ("Victim: Just leave me alone... *sob sob*");
+                captionText = ("Victim: Just leave me alone...");
                 StartCoroutine(ChangeCaptionText(0.3f, captionText));
                 captionText = "";
                 StartCoroutine(ChangeCaptionText(4f, captionText));

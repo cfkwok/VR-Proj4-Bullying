@@ -52,6 +52,7 @@ public class SOneMovement : MonoBehaviour {
     private bool bullyDialog;
     private Text captionTextUI;
     private bool bullyTalk;
+    
 
     // Use this for initialization
     void Start () {
@@ -532,6 +533,7 @@ public class SOneMovement : MonoBehaviour {
     }
     IEnumerator StartNextScene(float time)
     {
+        
         yield return new WaitForSeconds(time);
         goSceneTwo = true;
     }
