@@ -12,6 +12,8 @@ public class STBMovement : MonoBehaviour {
     private GameObject head;
     private GameObject bully;
     private Animator bullyAnimator;
+    private GameObject teacher;
+    private Animator teacherAnimator;
     private Button opt1;
     private Button opt2;
     private Text decision;
@@ -24,9 +26,12 @@ public class STBMovement : MonoBehaviour {
     private bool bullyWalk;
     private bool question1;
     private bool playerTurn;
+    private bool playerTurn2;
+    private bool teacherWalk;
     private bool question2;
     private bool question3;
     public GameObject runDestination;
+    public GameObject teacherDestination;
     void Start () {
         goHere = player.transform.position;
         panelGroup = GameObject.Find("QuestionMenu").GetComponent<CanvasGroup>();
@@ -35,11 +40,14 @@ public class STBMovement : MonoBehaviour {
         opt2 = GameObject.Find("Button2").GetComponent<Button>();
         panelGroup.alpha = 0;
         bully = GameObject.Find("Bully");
+        teacher = GameObject.Find("Liam");
+        teacherAnimator = teacher.GetComponent<Animator>();
         bullyAnimator = bully.GetComponent<Animator>();
         bullyWalk = true;
         fadeMenu = false;
         head = player.transform.FindChild("Head").gameObject;
-    }
+        playerTurn2 = false;
+}
 
     void Update() {
         player.transform.position = Vector3.MoveTowards(player.transform.position, goHere, speed * Time.deltaTime);
@@ -74,7 +82,7 @@ public class STBMovement : MonoBehaviour {
             if (player.transform.eulerAngles.y <= 180)
             {
                 showMenu = true;
-                delayTime = Time.time + 2f;
+                delayTime = Time.time + 1.5f;
                 speed = 7;
                 player.GetComponentInChildren<CardboardHead>().trackRotation = true;
                 run = false;
@@ -87,7 +95,7 @@ public class STBMovement : MonoBehaviour {
         {
             showMenu = false;
             fadeMenu = true;
-            bully.transform.position = Vector3.MoveTowards(bully.transform.position, runDestination.transform.position, speed * Time.deltaTime * 1.3f);
+            bully.transform.position = Vector3.MoveTowards(bully.transform.position, runDestination.transform.position, speed * Time.deltaTime * 1.2f);
             bully.transform.LookAt(player.transform.FindChild("LookAtPivot").transform);
             if (Vector3.Distance(bully.transform.position, player.transform.position) < 2.5)
             {
@@ -144,6 +152,37 @@ public class STBMovement : MonoBehaviour {
                 bullyAnimator.SetInteger("Current State", 7);
             }
         }
+        if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("zombie_headbutt"))
+        {
+            if (Vector3.Distance(teacher.transform.position, teacherDestination.transform.position) > .5f)
+            {
+                teacherWalk = true;
+            }
+        }
+        if (teacherWalk)
+        {
+            teacher.transform.position = Vector3.MoveTowards(teacher.transform.position, teacherDestination.transform.position, speed * Time.deltaTime * 1f);
+            teacher.transform.LookAt(player.transform.FindChild("LookAtPivot").transform);
+            if (Vector3.Distance(teacher.transform.position, teacherDestination.transform.position) < .5f)
+            {
+                teacherWalk = false;
+                playerTurn2 = true;
+                teacherAnimator.SetInteger("Current State", 1);
+                delayTime = Time.time + .7f;
+            }
+        }
+        if (playerTurn2)
+        {
+            player.transform.Rotate(Vector3.down * Time.deltaTime * -100.0f);
+            head.GetComponent<CardboardHead>().trackRotation = false;
+            if (player.transform.eulerAngles.y > 70 && player.transform.eulerAngles.y < 100)
+            {
+                head.GetComponent<CardboardHead>().trackRotation = true;
+                playerTurn2 = false;
+
+            }
+        }
+
     }
 
     void OnTriggerEnter()
