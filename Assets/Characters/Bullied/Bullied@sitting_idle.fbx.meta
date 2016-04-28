@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: eea4b3009babf3f40bf6520cb109b6de
-timeCreated: 1461702909
+guid: d89751a62f1aeca45b32782d5df866e6
+timeCreated: 1461798385
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -141,7 +141,7 @@ ModelImporter:
     400130: mixamorig:Spine
     400132: mixamorig:Spine1
     400134: mixamorig:Spine2
-    7400000: sitting
+    7400000: sitting_idle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -165,10 +165,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: sitting
+      name: sitting_idle
       takeName: mixamo.com
-      firstFrame: 0
-      lastFrame: 35
+      firstFrame: 176
+      lastFrame: 178
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

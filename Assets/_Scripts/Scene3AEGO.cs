@@ -1,10 +1,8 @@
-﻿// This scene is from "Scene 2: Kid is depressed", and user "Says nothing"
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class SThABMovement : MonoBehaviour {
+public class Scene3AEGO : MonoBehaviour {
 
     private MeshRenderer dialogVictim;
     private BoxCollider talkTrig;
@@ -27,11 +25,9 @@ public class SThABMovement : MonoBehaviour {
     private Text narrativeText;
     private Text captionTextUI;
     private string captionText;
-    private SThABSceneFadeInOut sceneFader;
-
-    public AudioSource classChat;
+    private Scene3AFade sceneFader;
+    
     public AudioSource teacherAudio;
-    private bool stopClassChat;
     private bool stopTeacherAudio;
 
     // Use this for initialization
@@ -49,37 +45,30 @@ public class SThABMovement : MonoBehaviour {
 
         narrativeText = GameObject.Find("Character/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
         captionTextUI = GameObject.Find("Character/Head/Main Camera/Fader/Caption").GetComponent<Text>();
-        sceneFader = GameObject.Find("Fader").GetComponent<SThABSceneFadeInOut>();
-
-        StartCoroutine(StopClassChat(3f));
-        StartCoroutine(StartTeacherAudio(2.8f));
-        captionText = ("Teacher: OK class, time to call roll...");
-        StartCoroutine(ChangeCaptionText(3f, captionText));
-        captionText = ("Classmate: Pssst look who's not here again...");
-        StartCoroutine(ChangeCaptionText(7f, captionText));
+        sceneFader = GameObject.Find("Fader").GetComponent<Scene3AFade>();
+        teacherAudio.Play();
+        captionText = ("You: Looks like he decided to talk with the teacher about it...");
+        StartCoroutine(ChangeCaptionText(2f, captionText));
+        captionText = "";
+        StartCoroutine(ChangeCaptionText(8f, captionText));
+        captionText = ("You: I'm sure it will work out for him.");
+        StartCoroutine(ChangeCaptionText(11f, captionText));
         captionText = ("");
-        StartCoroutine(ChangeCaptionText(12f, captionText));
+        StartCoroutine(ChangeCaptionText(16f, captionText));
+        StartCoroutine(StartNextScene(19f));
 
-        StartCoroutine(StartSceneFlow(13));
-        
+        narrativeText.text = "The victim took your advice and decided to talk to someone about his problem...";
     }
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 rot = Camera.main.transform.rotation.eulerAngles;
-        rot.x = 0;
-        rot.z = 270;
-        rot.y += 95;
-        dialogVictim.transform.rotation = Quaternion.Euler(rot);
 
         if (goNextScene)
         {
-            sceneFader.EndScene(6);
+            sceneFader.EndScene(4);
+            stopTeacherAudio = true;
         }
-        if (stopClassChat)
-        {
-            classChat.volume -= 0.01f;
-        }
+
         if (stopTeacherAudio)
         {
             teacherAudio.volume -= 0.01f;
@@ -98,25 +87,35 @@ public class SThABMovement : MonoBehaviour {
         talkTrig.enabled = false;
     }
 
-    public void OnGazeClick()
+    void enableMenu()
     {
-        if (!fadeMenu)
+        panelGroup.alpha += 1f * Time.deltaTime;
+        opt1.enabled = true;
+        opt2.enabled = true;
+        panelGroup.GetComponent<Canvas>().enabled = true;
+        if (panelGroup.alpha == 1f)
         {
-            disableDialog();
-            captionText = ("You: Looks like he's not here again today... wonder if he's OK...");
-            StartCoroutine(ChangeCaptionText(0.7f, captionText));
-            captionText = ("");
-            StartCoroutine(ChangeCaptionText(5.7f, captionText));
-            StartCoroutine(StartNextScene(6f));
-            StartCoroutine(StopTeacherAudio(6f));
-            narrativeText.text = "The bullying victim has not been to school the past two weeks...";
+            showMenu = false;
         }
     }
 
-    IEnumerator StartSceneFlow(float time)
+    void disableMenu()
     {
-        yield return new WaitForSeconds(time);
-        enableDialog();
+        panelGroup.alpha -= 1f * Time.deltaTime;
+        opt1.enabled = false;
+        opt2.enabled = false;
+        panelGroup.GetComponent<Canvas>().enabled = false;
+        if (panelGroup.alpha == 0f)
+        {
+            fadeMenu = false;
+        }
+    }
+
+    public void changeQuestion(string question, string btn1, string btn2)
+    {
+        textQuestion.text = question;
+        opt1.GetComponentInChildren<Text>().text = btn1;
+        opt2.GetComponentInChildren<Text>().text = btn2;
     }
 
     IEnumerator ChangeCaptionText(float time, string textStr)
@@ -129,23 +128,5 @@ public class SThABMovement : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         goNextScene = true;
-    }
-
-    IEnumerator StopClassChat(float time)
-    {
-        yield return new WaitForSeconds(time);
-        stopClassChat = true;
-    }
-
-    IEnumerator StartTeacherAudio(float time)
-    {
-        yield return new WaitForSeconds(time);
-        teacherAudio.Play();
-    }
-
-    IEnumerator StopTeacherAudio(float time)
-    {
-        yield return new WaitForSeconds(time);
-        stopTeacherAudio = true;
-    }
+    }    
 }

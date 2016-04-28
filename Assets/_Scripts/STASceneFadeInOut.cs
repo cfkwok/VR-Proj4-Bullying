@@ -113,22 +113,22 @@ public class STASceneFadeInOut : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
         {
-            levelName = "outside";
+            levelName = "bscene3a_class";
             if (textInt == 0)
             {
-                narrativeText.text = "Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
+                narrativeText.text = "\"Social exclusion is the most common form of bullying in infant classes, according to research\"";
                 textInt++;
-                timeToRead = 5f;
+                timeToRead = 8f;
             }
             else if (textInt == 1)
             {
-                narrativeText.text = "Stats say bullies are mean1 Stats say bullies are mean1";
+                narrativeText.text = "\"About 44.2 percent of middle school students have experienced teasing and name calling\"";
                 textInt++;
                 timeToRead = 10f;
             }
             else if (textInt == 2)
             {
-                narrativeText.text = "Stats say bullies are mean2";
+                narrativeText.text = "\"33 percent reported being bullied inside the classroom\"";
                 textInt++;
                 timeToRead = 5f;
             }
@@ -143,19 +143,19 @@ public class STASceneFadeInOut : MonoBehaviour
             levelName = "scene1a_crowd";
             if (textInt == 0)
             {
-                narrativeText.text = "2Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
+                narrativeText.text = "\"Social exclusion is the most common form of bullying in infant classes, according to research\"";
                 textInt++;
-                timeToRead = 5f;
+                timeToRead = 8f;
             }
             else if (textInt == 1)
             {
-                narrativeText.text = "2Stats say bullies are mean1 Stats say bullies are mean1";
+                narrativeText.text = "\"About 44.2 percent of middle school students have experienced teasing and name calling\"";
                 textInt++;
                 timeToRead = 10f;
             }
             else if (textInt == 2)
             {
-                narrativeText.text = "2Stats say bullies are mean2";
+                narrativeText.text = "\"33 percent reported being bullied inside the classroom\"";
                 textInt++;
                 timeToRead = 5f;
             }

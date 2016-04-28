@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class SThABSceneFadeInOut : MonoBehaviour
+public class Scene3AFade : MonoBehaviour
 {
     public Image FadeImg;
     public float fadeSpeed = 1.5f;
@@ -85,9 +85,8 @@ public class SThABSceneFadeInOut : MonoBehaviour
 
         // Start fading towards black.
         FadeToBlack();
-        
+
         statsPath = 1;
-     
 
         // If the screen is almost black...
         if (FadeImg.color.a >= 0.95f)
@@ -103,7 +102,6 @@ public class SThABSceneFadeInOut : MonoBehaviour
 
     IEnumerator ExecuteAfterTime(float time)
     {
-
         callRoutine = false;
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
@@ -111,47 +109,29 @@ public class SThABSceneFadeInOut : MonoBehaviour
             levelName = "scene1_crowd";
             if (textInt == 0)
             {
-                narrativeText.text = "\"Approximately 160,000 teens skip school every day because of bullying.\"";
-                textInt++;
-                timeToRead = 8f;
-            }
-            else if (textInt == 1)
-            {
-                narrativeText.text = "\"1 in 10 students drop out of school because of repeated bullying\"";
-                textInt++;
-                timeToRead = 5f;
-            }
-            else if (textInt == 2)
-            {
-                narrativeText.text = "\"Bully victims are between 2 to 9 times more likely to consider suicide than non-victims, according to studies by Yale University\"";
+                narrativeText.text = "\"Students reported that the most helpful things teachers can do are: listen to the student, check in with them afterwards to see if the bullying stopped, and give the student advice\"";
                 textInt++;
                 timeToRead = 13f;
             }
+            else if (textInt == 1)
+            {
+                narrativeText.text = "75% of the teachers will help the student in a bullying situation...";
+                textInt++;
+                timeToRead = 7f;
+            }
+            else if (textInt == 2)
+            {
+                narrativeText.text = "the other 15% feel indifferent about bullying. (They let it slide)";
+                textInt++;
+                timeToRead = 7f;
+            }
             else if (textInt == 3)
-            {
-                narrativeText.text = "and...";
-                textInt++;
-                timeToRead = 3f;
-            }
-            else if (textInt == 4)
-            {
-                narrativeText.text = "";
-                textInt++;
-                timeToRead = 1.5f;
-            }
-            else if (textInt == 5)
-            {
-                narrativeText.text = "Suicide is the third leading cause of death among young people, resulting in about 4,400 deaths per year";
-                textInt++;
-                timeToRead = 10f;
-            }
-            else if (textInt == 6)
             {
                 narrativeText.text = "End of route";
                 textInt++;
                 timeToRead = 5f;
             }
-            else if (textInt == 7)
+            else if (textInt == 4)
             {
                 ActivateScene();
             }
@@ -159,7 +139,6 @@ public class SThABSceneFadeInOut : MonoBehaviour
         loadScene = true;
         callRoutine = true;
     }
-
 
     public void StartLoading()
     {
@@ -181,5 +160,4 @@ public class SThABSceneFadeInOut : MonoBehaviour
         async.allowSceneActivation = false;
         yield return async;
     }
-
 }

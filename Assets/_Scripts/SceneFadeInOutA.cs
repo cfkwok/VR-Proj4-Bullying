@@ -86,11 +86,11 @@ public class SceneFadeInOutA : MonoBehaviour
         // Start fading towards black.
         FadeToBlack();
 
-        if (narrativeText.text.Contains("stopped"))
+        if (narrativeText.text.Contains("stopped") && statsPath == 0)
         {
             statsPath = 1;
         }
-        if (narrativeText.text.Contains("intervene"))
+        if (narrativeText.text.Contains("intervene") && statsPath == 0)
         {
             statsPath = 2;
         }
@@ -114,12 +114,12 @@ public class SceneFadeInOutA : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
         {
-            levelName = "outside";
+            levelName = "scene1_crowd";
             if (textInt == 0)
             {
                 narrativeText.text = "";
                 textInt++;
-                timeToRead = 10f;
+                timeToRead = 0f;
             }
             else if (textInt == 1)
             {
@@ -130,9 +130,17 @@ public class SceneFadeInOutA : MonoBehaviour
             else if (textInt == 2)
             {
                 narrativeText.text = "\"If I say anything, he’ll turn on me next!\" is a common mentality bystanders have.";
+                textInt++;
                 timeToRead = 8f;
+                
             }
             else if (textInt == 3)
+            {
+                narrativeText.text = "End of route";
+                textInt++;
+                timeToRead = 5f;
+            }
+            else if (textInt == 4)
             {
                 ActivateScene();
             }
@@ -156,6 +164,7 @@ public class SceneFadeInOutA : MonoBehaviour
             else if (textInt == 2)
             {
                 narrativeText.text = "\"If I say anything, he’ll turn on me next!\" is a common mentality bystanders have.";
+                textInt++;
                 timeToRead = 8f;
             }
             else if (textInt == 3)
