@@ -525,7 +525,6 @@ public class SOneMovement : MonoBehaviour {
         kickSound.Play();
         bullyAnimator.SetInteger("Current State", 1);
         victimAnimator.SetInteger("Current State", 1);
-
         captionText = ("Victim: BLUH...");
         victimGrunt.Play();
         StartCoroutine(ChangeCaptionText(0.2f, captionText));

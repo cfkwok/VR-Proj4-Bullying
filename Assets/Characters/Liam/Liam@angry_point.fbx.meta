@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e2c1a5fa873b36440a8217f494691a84
-timeCreated: 1461441693
+guid: 242742c27f8d766499ea7bfc22e63689
+timeCreated: 1461713177
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -141,7 +141,7 @@ ModelImporter:
     400130: mixamorig:Spine
     400132: mixamorig:Spine1
     400134: mixamorig:Spine2
-    7400000: getting_hit
+    7400000: angry_point
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -165,17 +165,17 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: getting_hit
+      name: angry_point
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 53
+      lastFrame: 73
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
