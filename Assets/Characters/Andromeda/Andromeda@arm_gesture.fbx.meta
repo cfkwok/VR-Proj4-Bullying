@@ -167,7 +167,7 @@ ModelImporter:
     - serializedVersion: 16
       name: arm_gesture
       takeName: mixamo.com
-      firstFrame: 65
+      firstFrame: 96
       lastFrame: 102
       wrapMode: 0
       orientationOffsetY: 0

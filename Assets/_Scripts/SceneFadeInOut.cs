@@ -15,6 +15,10 @@ public class SceneFadeInOut : MonoBehaviour
     private Text narrativeText;
     private bool callRoutine = true;
     private int statsPath = 0;
+    public string levelName;
+    AsyncOperation async;
+    private bool loadScene;
+    private bool loadFlag = true;
 
     void Awake()
     {
@@ -31,6 +35,12 @@ public class SceneFadeInOut : MonoBehaviour
         if (sceneStarting)
             // ... call the StartScene function.
             StartScene();
+
+        if (loadScene && loadFlag)
+        {
+            loadFlag = false;
+            StartLoading();
+        }
     }
 
 
@@ -105,10 +115,12 @@ public class SceneFadeInOut : MonoBehaviour
 
     IEnumerator ExecuteAfterTime(float time)
     {
+        
         callRoutine = false;
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
         {
+            levelName = "outside";
             if (textInt == 0)
             {
                 narrativeText.text = "\"In a 2007 study, 86% of LGBT students said that they had experienced harassment at school during the previous year\"";
@@ -126,10 +138,15 @@ public class SceneFadeInOut : MonoBehaviour
                 narrativeText.text = "\"If I say anything, he’ll turn on me next!\" is a common mentality bystanders have.";
                 timeToRead = 8f;
             }
+            else if (textInt == 3)
+            {
+                ActivateScene();
+            }
         }
 
         else if (statsPath == 2)
         {
+            levelName = "bscene2_class";
             if (textInt == 0)
             {
                 narrativeText.text = "\"In a 2007 study, 86% of LGBT students said that they had experienced harassment at school during the previous year\"";
@@ -148,7 +165,35 @@ public class SceneFadeInOut : MonoBehaviour
                 textInt++;
                 timeToRead = 8f;
             }
+            else if (textInt == 3)
+            {
+                ActivateScene();
+            }
         }
+        loadScene = true;
         callRoutine = true;
     }
+
+
+    public void StartLoading()
+    {
+        StartCoroutine("load");
+    }
+
+
+
+    public void ActivateScene()
+    {
+        async.allowSceneActivation = true;
+    }
+
+    IEnumerator load()
+    {
+        Debug.LogWarning("ASYNC LOAD STARTED - " +
+           "DO NOT EXIT PLAY MODE UNTIL SCENE LOADS... UNITY WILL CRASH");
+        async = SceneManager.LoadSceneAsync(levelName);
+        async.allowSceneActivation = false;
+        yield return async;
+    }
+
 }
