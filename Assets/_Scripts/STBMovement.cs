@@ -32,7 +32,23 @@ public class STBMovement : MonoBehaviour {
     private bool question3;
     public GameObject runDestination;
     public GameObject teacherDestination;
+
+    private Text narrativeText;
+    private string captionText;
+    private Text captionTextUI;
+    private bool dialog;
+    private bool delayOption;
+    private bool fight;
+    private Transform lookHere;
+    private SceneFadeInOut2 sceneFade;
+    private Image hit;
+
     void Start () {
+        narrativeText = GameObject.Find("CardboardMain/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
+        captionTextUI = GameObject.Find("CardboardMain/Head/Main Camera/Fader/Caption").GetComponent<Text>();
+        sceneFade = GameObject.Find("CardboardMain/Head/Main Camera/Fader").GetComponent<SceneFadeInOut2>();
+        hit = GameObject.Find("CardboardMain/Head/Main Camera/Hit Red").GetComponent<Image>();
+        dialog = false;
         goHere = player.transform.position;
         panelGroup = GameObject.Find("QuestionMenu").GetComponent<CanvasGroup>();
         decision = panelGroup.transform.FindChild("Question").GetComponent<Text>();
@@ -88,6 +104,10 @@ public class STBMovement : MonoBehaviour {
                 run = false;
                 goHere = runDestination.transform.position;
                 bullyRun = true;
+                captionText = "Bully: Hey! Get back here!";
+                StartCoroutine(ChangeCaptionText(.5f, captionText));
+                captionText = "";
+                StartCoroutine(ChangeCaptionText(4f, captionText));
             }
         }
 
@@ -95,6 +115,8 @@ public class STBMovement : MonoBehaviour {
         {
             showMenu = false;
             fadeMenu = true;
+
+
             bully.transform.position = Vector3.MoveTowards(bully.transform.position, runDestination.transform.position, speed * Time.deltaTime * 1.2f);
             bully.transform.LookAt(player.transform.FindChild("LookAtPivot").transform);
             if (Vector3.Distance(bully.transform.position, player.transform.position) < 2.5)
@@ -102,9 +124,7 @@ public class STBMovement : MonoBehaviour {
                 bullyRun = false;
                 goHere = player.transform.position;
                 bullyAnimator.SetInteger("Current State", 1);
-                decision.text = "Will you fight back\nor do nothing?";
-                opt1.GetComponentInChildren<Text>().text = "Fight back";
-                opt2.GetComponentInChildren<Text>().text = "Do nothing";
+                dialog = true;
                 question2 = true;
                 fadeMenu = false;
                 opt2.colors = opt1.colors;
@@ -128,7 +148,6 @@ public class STBMovement : MonoBehaviour {
             {
                 head.GetComponent<CardboardHead>().trackRotation = true;
                 playerTurn = false;
-                showMenu = true;
             }
         }
         if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("kick_to_the_groin") || bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("shoulder_hit_and_fall"))
@@ -136,17 +155,41 @@ public class STBMovement : MonoBehaviour {
             if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 bullyAnimator.SetInteger("Current State", 5);
+                captionText = "I can't believe you did that! Now you're dead!";
+                StartCoroutine(ChangeCaptionText(0, captionText));
             }
         }
         if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("getting_up"))
         {
             if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
+                captionText = "Let's see how you like this!";
+                StartCoroutine(ChangeCaptionText(0, captionText));
+                captionText = "";
+                StartCoroutine(ChangeCaptionText(4, captionText));
                 bullyAnimator.SetInteger("Current State", 6);
             }
         }
         if (bullyAnimator.GetCurrentAnimatorStateInfo(0).IsName("zombie_punching"))
         {
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > .4 && bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                hit.color = Color.Lerp(hit.color, Color.red, 2 * Time.deltaTime);
+            }
+            if(bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.4){
+                hit.color = Color.Lerp(hit.color, Color.clear, 2 * Time.deltaTime);
+            }
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.4 && bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 2)
+            {
+                hit.color = Color.Lerp(hit.color, Color.red, 2 * Time.deltaTime);
+            }
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2 && bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 2.4){
+                hit.color = Color.Lerp(hit.color, Color.clear, 2 * Time.deltaTime);
+            }
+            if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2.4 && bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 3)
+            {
+                hit.color = Color.Lerp(hit.color, Color.red, 2 * Time.deltaTime);
+            }
             if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 3)
             {
                 bullyAnimator.SetInteger("Current State", 7);
@@ -162,36 +205,112 @@ public class STBMovement : MonoBehaviour {
         if (teacherWalk)
         {
             teacher.transform.position = Vector3.MoveTowards(teacher.transform.position, teacherDestination.transform.position, speed * Time.deltaTime * 1f);
-            teacher.transform.LookAt(player.transform.FindChild("LookAtPivot").transform);
+            teacher.transform.LookAt(lookHere);
             if (Vector3.Distance(teacher.transform.position, teacherDestination.transform.position) < .5f)
             {
                 teacherWalk = false;
                 playerTurn2 = true;
                 teacherAnimator.SetInteger("Current State", 1);
-                delayTime = Time.time + .7f;
             }
         }
         if (playerTurn2)
         {
+            hit.color = Color.Lerp(hit.color, Color.clear, 2 * Time.deltaTime);
             player.transform.Rotate(Vector3.down * Time.deltaTime * -100.0f);
             head.GetComponent<CardboardHead>().trackRotation = false;
-            if (player.transform.eulerAngles.y > 70 && player.transform.eulerAngles.y < 100)
+            if (head.transform.eulerAngles.y > 70 && head.transform.eulerAngles.y < 100)
             {
                 head.GetComponent<CardboardHead>().trackRotation = true;
                 playerTurn2 = false;
-
+                dialog = true;
             }
         }
-
+        if(dialog && !question1 && !question2 && !question3)
+        {
+            if (fight)
+            {
+                captionText = "Teacher: Hey! Stop this fighting right now!";
+                StartCoroutine(ChangeCaptionText(0, captionText));
+                captionText = "Both of you are in trouble.";
+                StartCoroutine(ChangeCaptionText(4.5f, captionText));
+                captionText = "I'm going to have to report this to the principal.";
+                StartCoroutine(ChangeCaptionText(8.5f, captionText));
+                captionText = "You both can expect a suspension to head your way.";
+                StartCoroutine(ChangeCaptionText(13f, captionText));
+                captionText = "";
+                StartCoroutine(ChangeCaptionText(17f, captionText));
+                StartCoroutine(DelayOptions(18));
+                dialog = false;
+            }
+            if (!fight)
+            {
+                captionText = "Teacher: Hey! Stop this fighting right now!";
+                StartCoroutine(ChangeCaptionText(0, captionText));
+                captionText = "Bully I saw the whole thing.";
+                StartCoroutine(ChangeCaptionText(4.5f, captionText));
+                captionText = "Fighting is not allowed in school.";
+                StartCoroutine(ChangeCaptionText(8.5f, captionText));
+                captionText = "I'm going to have to report this to the principal.";
+                StartCoroutine(ChangeCaptionText(12f, captionText));
+                captionText = "Bully you're going to be suspended for your actions.";
+                StartCoroutine(ChangeCaptionText(15f, captionText));
+                captionText = "";
+                StartCoroutine(ChangeCaptionText(19f, captionText));
+                StartCoroutine(DelayOptions(20));
+                dialog = false;
+            }
+        }
+        if(delayOption && !question1 && !question2 && !question3)
+        {
+           // Debug.Log("Fai");
+            sceneFade.EndScene(1);
+        }
+        if (question1 && dialog)
+        {
+            captionText = "Bully: There you are! I've been looking for you!";
+            StartCoroutine(ChangeCaptionText(0, captionText));
+            captionText = "I was going to let it slide that you interfered but you lost your chance";
+            StartCoroutine(ChangeCaptionText(4.5f, captionText));
+            captionText = "when I heard you told the teacher what had happened!";
+            StartCoroutine(ChangeCaptionText(8.5f, captionText));
+            captionText = "";
+            StartCoroutine(ChangeCaptionText(13f, captionText));
+            StartCoroutine(DelayOptions(13.5f));
+            dialog = false;
+        }
+        if (question1 && !fadeMenu && delayOption)
+        {
+            showMenu = true;
+            delayOption = false;
+        }
+        if (question2 && dialog)
+        {
+            captionText = "Bully: Did you really think you could get away?";
+            StartCoroutine(ChangeCaptionText(0, captionText));
+            captionText = "I'm the fastest kid in school! Never forget that!";
+            StartCoroutine(ChangeCaptionText(4.5f, captionText));
+            captionText = "It is time for your beating! I hope you're prepared!";
+            StartCoroutine(ChangeCaptionText(8.5f, captionText));
+            captionText = "";
+            StartCoroutine(ChangeCaptionText(13f, captionText));
+            StartCoroutine(DelayOptions(13.5f));
+            dialog = false;
+        }
+        if (question2 && !fadeMenu && delayOption)
+        {
+            decision.text = "Will you fight back\nor do nothing?";
+            opt1.GetComponentInChildren<Text>().text = "Fight back";
+            opt2.GetComponentInChildren<Text>().text = "Do nothing";
+            showMenu = true;
+            delayOption = false;
+        }
     }
 
     void OnTriggerEnter()
     {
-        if (!fadeMenu)
-        {
-            showMenu = true;
-        }
         question1 = true;
+        dialog = true;
+
     }
     void enableMenu()
     {
@@ -244,15 +363,20 @@ public class STBMovement : MonoBehaviour {
         {
             question3 = false;
             fadeMenu = true;
+            captionText = "Bully: ARRRGGGHHH!";
+            StartCoroutine(ChangeCaptionText(0, captionText));
             bullyAnimator.SetInteger("Current State", 3);
         }
         if (question2)
         {
             question2 = false;
             question3 = true;
+            fight = true;
+            narrativeText.text = "You chose to fight back";
             decision.text = "Kick or punch?";
             opt1.GetComponentInChildren<Text>().text = "kick";
-            opt2.GetComponentInChildren<Text>().text = "Punch";
+            opt2.GetComponentInChildren<Text>().text = "punch";
+            lookHere = player.transform.FindChild("LookAtPivot").transform;
         }
     }
     // Question X Choice 2
@@ -267,13 +391,33 @@ public class STBMovement : MonoBehaviour {
         {
             question2 = false;
             fadeMenu = true;
+            fight = false;
+            narrativeText.text = "You chose to not fight back";
+            captionText = "Let's see how you like this!";
+            StartCoroutine(ChangeCaptionText(1, captionText));
+            captionText = "";
+            StartCoroutine(ChangeCaptionText(4, captionText));
             bullyAnimator.SetInteger("Current State", 6);
+            lookHere = bully.transform.FindChild("LookAtPivot").transform;
         }
         if (question3)
         {
             question3 = false;
             fadeMenu = true;
+            captionText = "Bully: ARRRGGGHHH!";
+            StartCoroutine(ChangeCaptionText(0, captionText));
             bullyAnimator.SetInteger("Current State", 4);
         }
+    }
+
+    IEnumerator ChangeCaptionText(float time, string textStr)
+    {
+        yield return new WaitForSeconds(time);
+        captionTextUI.text = textStr;
+    }
+    IEnumerator DelayOptions(float time)
+    {
+        yield return new WaitForSeconds(time);
+        delayOption = true;
     }
 }
