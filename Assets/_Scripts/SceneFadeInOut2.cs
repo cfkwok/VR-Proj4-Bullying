@@ -15,6 +15,10 @@ public class SceneFadeInOut2 : MonoBehaviour
     private Text narrativeText;
     private bool callRoutine = true;
     private int statsPath = 0;
+    public string levelName;
+    AsyncOperation async;
+    private bool loadScene;
+    private bool loadFlag = true;
 
     void Awake()
     {
@@ -31,6 +35,11 @@ public class SceneFadeInOut2 : MonoBehaviour
         if (sceneStarting)
             // ... call the StartScene function.
             StartScene();
+        if (loadScene && loadFlag)
+        {
+            loadFlag = false;
+            StartLoading();
+        }
     }
 
 
@@ -106,6 +115,7 @@ public class SceneFadeInOut2 : MonoBehaviour
     IEnumerator ExecuteAfterTime(float time)
     {
         callRoutine = false;
+        levelName = "scene1_crowd";
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
         {
@@ -127,9 +137,15 @@ public class SceneFadeInOut2 : MonoBehaviour
                 timeToRead = 8f;
                 textInt++;
             }
-            else if(textInt == 3)
+            else if (textInt == 3)
             {
                 narrativeText.text = "End Route";
+                timeToRead = 5f;
+                textInt++;
+            }
+            else if (textInt == 4)
+            {
+                ActivateScene();
             }
         }
 
@@ -156,8 +172,37 @@ public class SceneFadeInOut2 : MonoBehaviour
             else if (textInt == 3)
             {
                 narrativeText.text = "End Route";
+                timeToRead = 5f;
+                textInt++;
+            }
+            else if(textInt == 4)
+            {
+                ActivateScene();
             }
         }
+        loadScene = true;
         callRoutine = true;
+    }
+
+
+    public void StartLoading()
+    {
+        StartCoroutine("load");
+    }
+
+
+
+    public void ActivateScene()
+    {
+        async.allowSceneActivation = true;
+    }
+
+    IEnumerator load()
+    {
+        Debug.LogWarning("ASYNC LOAD STARTED - " +
+           "DO NOT EXIT PLAY MODE UNTIL SCENE LOADS... UNITY WILL CRASH");
+        async = SceneManager.LoadSceneAsync(levelName);
+        async.allowSceneActivation = false;
+        yield return async;
     }
 }

@@ -42,6 +42,8 @@ public class STBMovement : MonoBehaviour {
     private Transform lookHere;
     private SceneFadeInOut2 sceneFade;
     private Image hit;
+    public AudioSource bullyAudio;
+    public AudioSource teacherAudio;
 
     void Start () {
         narrativeText = GameObject.Find("CardboardMain/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
@@ -108,6 +110,8 @@ public class STBMovement : MonoBehaviour {
                 StartCoroutine(ChangeCaptionText(.5f, captionText));
                 captionText = "";
                 StartCoroutine(ChangeCaptionText(4f, captionText));
+                bullyAudio.Play();
+                StartCoroutine(StopBullyAudio(4));
             }
         }
 
@@ -167,6 +171,7 @@ public class STBMovement : MonoBehaviour {
                 StartCoroutine(ChangeCaptionText(0, captionText));
                 captionText = "";
                 StartCoroutine(ChangeCaptionText(4, captionText));
+                StartCoroutine(StopBullyAudio(4));
                 bullyAnimator.SetInteger("Current State", 6);
             }
         }
@@ -229,6 +234,7 @@ public class STBMovement : MonoBehaviour {
         {
             if (fight)
             {
+                teacherAudio.Play();
                 captionText = "Teacher: Hey! Stop this fighting right now!";
                 StartCoroutine(ChangeCaptionText(0, captionText));
                 captionText = "Both of you are in trouble.";
@@ -240,6 +246,8 @@ public class STBMovement : MonoBehaviour {
                 captionText = "";
                 StartCoroutine(ChangeCaptionText(17f, captionText));
                 StartCoroutine(DelayOptions(18));
+                teacherAudio.Play();
+                StartCoroutine(StopTeacherAudio(17));
                 dialog = false;
             }
             if (!fight)
@@ -257,6 +265,8 @@ public class STBMovement : MonoBehaviour {
                 captionText = "";
                 StartCoroutine(ChangeCaptionText(19f, captionText));
                 StartCoroutine(DelayOptions(20));
+                teacherAudio.Play();
+                StartCoroutine(StopTeacherAudio(19));
                 dialog = false;
             }
         }
@@ -276,6 +286,8 @@ public class STBMovement : MonoBehaviour {
             captionText = "";
             StartCoroutine(ChangeCaptionText(13f, captionText));
             StartCoroutine(DelayOptions(13.5f));
+            bullyAudio.Play();
+            StartCoroutine(StopBullyAudio(13));
             dialog = false;
         }
         if (question1 && !fadeMenu && delayOption)
@@ -294,6 +306,8 @@ public class STBMovement : MonoBehaviour {
             captionText = "";
             StartCoroutine(ChangeCaptionText(13f, captionText));
             StartCoroutine(DelayOptions(13.5f));
+            bullyAudio.Play();
+            StartCoroutine(StopBullyAudio(13));
             dialog = false;
         }
         if (question2 && !fadeMenu && delayOption)
@@ -364,6 +378,7 @@ public class STBMovement : MonoBehaviour {
             question3 = false;
             fadeMenu = true;
             captionText = "Bully: ARRRGGGHHH!";
+            bullyAudio.Play();
             StartCoroutine(ChangeCaptionText(0, captionText));
             bullyAnimator.SetInteger("Current State", 3);
         }
@@ -397,6 +412,8 @@ public class STBMovement : MonoBehaviour {
             StartCoroutine(ChangeCaptionText(1, captionText));
             captionText = "";
             StartCoroutine(ChangeCaptionText(4, captionText));
+            bullyAudio.Play();
+            StartCoroutine(StopBullyAudio(4));
             bullyAnimator.SetInteger("Current State", 6);
             lookHere = bully.transform.FindChild("LookAtPivot").transform;
         }
@@ -405,6 +422,7 @@ public class STBMovement : MonoBehaviour {
             question3 = false;
             fadeMenu = true;
             captionText = "Bully: ARRRGGGHHH!";
+            bullyAudio.Play();
             StartCoroutine(ChangeCaptionText(0, captionText));
             bullyAnimator.SetInteger("Current State", 4);
         }
@@ -419,5 +437,20 @@ public class STBMovement : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         delayOption = true;
+    }
+    IEnumerator AudioPlay(float time)
+    {
+        yield return new WaitForSeconds(time);
+        delayOption = true;
+    }
+    IEnumerator StopBullyAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        bullyAudio.Stop();
+    }
+    IEnumerator StopTeacherAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        teacherAudio.Stop();
     }
 }
