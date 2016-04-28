@@ -11,6 +11,7 @@ public class SOneMovement : MonoBehaviour {
     private GameObject head;
     private GameObject friendObject;
     private GameObject bullyObject;
+    public AudioSource kickSound;
     private MeshRenderer dialogFriend;
     private MeshRenderer dialogBully;
     private BoxCollider talkTrig;
@@ -52,6 +53,13 @@ public class SOneMovement : MonoBehaviour {
     private bool bullyDialog;
     private Text captionTextUI;
     private bool bullyTalk;
+    public AudioSource friendAudio;
+    public AudioSource bullyAudio;
+    public AudioSource victimAudio;
+    public AudioSource crowdAudio;
+    public AudioSource victimGrunt;
+    private bool fadeSound;
+
 
     // Use this for initialization
     void Start () {
@@ -130,7 +138,9 @@ public class SOneMovement : MonoBehaviour {
             if (bullyObject.transform.eulerAngles.y <= 185)
             {
                 talkedToBully = true;
-                bullyAnimator.SetInteger("Current State", 0);                
+                bullyAnimator.SetInteger("Current State", 0);
+                bullyAudio.Play();
+                StartCoroutine(StopBullyAudio(16f));
                 captionText = "Bully: What do you want, chump?!";
                 StartCoroutine(ChangeCaptionText(0.3f, captionText));
                 //captionText = ("User: Leave him alone, you will get in trouble for this. How does jail sound?");
@@ -158,6 +168,8 @@ public class SOneMovement : MonoBehaviour {
                     
                     if (!bullyTalk)
                     {
+                        victimAudio.Play();
+                        StartCoroutine(StopVictimAudio(6f));
                         captionText = ("Victim: Yeah... I'm alright...");
                         StartCoroutine(ChangeCaptionText(0.3f, captionText));
                         captionText = ("Victim: Thanks for your help...");
@@ -198,12 +210,14 @@ public class SOneMovement : MonoBehaviour {
                 friendAnimator.SetInteger("Current State", 2);
                 changeQuestion("Do you want to continue interfering?", "Yes", "No");
                 // Make char glow to click on trigger
+                friendAudio.Play();
+                StartCoroutine(StopFriendAudio(10f));
                 captionText = ("Friend: Wait! I don't think it's a good idea to get in his way.");
                 StartCoroutine(ChangeCaptionText(0.2f, captionText));
                 captionText = "Friend: He could beat you down!";
-                StartCoroutine(ChangeCaptionText(5.2f, captionText));
+                StartCoroutine(ChangeCaptionText(6.2f, captionText));
                 captionText = "";
-                StartCoroutine(ChangeCaptionText(8.5f, captionText));
+                StartCoroutine(ChangeCaptionText(10f, captionText));
                 StartCoroutine(FriendDissuade(10.5f));
                 
                 
@@ -292,8 +306,10 @@ public class SOneMovement : MonoBehaviour {
             watchPos.z = friendObject.transform.position.z;
             watchPos.x = friendObject.transform.position.x - 1f;
             player.transform.position = Vector3.Lerp(player.transform.position, watchPos, speed * Time.deltaTime * 5);
-            if (victimAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+            if (victimAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !kickSound.isPlaying)
             {
+                kickSound.Play();
+                victimGrunt.Play();
                 bullyAnimator.Play("zombie_punching", -1, 0f);
                 victimAnimator.Play("getting_hit", -1, 0f);
                 contBullyCount++;
@@ -311,6 +327,8 @@ public class SOneMovement : MonoBehaviour {
             if (bullyAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
             {
                 bullyAnimator.Play("yelling", -1, 0f);
+                bullyAudio.Play();
+                StartCoroutine(StopBullyAudio(16f));
                 captionText = "Bully: Wimp! Better stay down, hahaha.";
                 StartCoroutine(ChangeCaptionText(1f, captionText));
                 captionText = "Victim: No more, please...";
@@ -324,7 +342,12 @@ public class SOneMovement : MonoBehaviour {
         }
         if (goSceneTwo)
         {
+            fadeSound = true;
             sceneFader.EndScene(1);
+        }
+        if (fadeSound)
+        {
+            crowdAudio.volume -= 0.01f;
         }
 
     }
@@ -382,6 +405,8 @@ public class SOneMovement : MonoBehaviour {
             question1 = true;
             talkTrig.enabled = false;
 
+            bullyAudio.Play();
+            StartCoroutine(StopBullyAudio(8f));
             captionText = ("Victim: Please, I don't want any trouble!");
             StartCoroutine(ChangeCaptionText(0.2f, captionText));
             captionText = ("Bully: Don't worry buddy. Let me punch the GAY out of you.");
@@ -435,7 +460,8 @@ public class SOneMovement : MonoBehaviour {
         if (question2 && !showMenu)
         {
             // print("Show friend agreeing with you");
-           
+            friendAudio.Play();
+            StartCoroutine(StopFriendAudio(3.7f));
             friendAnimator.SetInteger("Current State", 3);
             captionText = ("Friend: You're a brave one. Don't get yourself hurt, pal.");
             StartCoroutine(ChangeCaptionText(0.2f, captionText));
@@ -474,6 +500,7 @@ public class SOneMovement : MonoBehaviour {
         yield return new WaitForSeconds(time);
         victimDowned = true;
         captionText = ("Victim: GAHH UGHH...");
+        victimGrunt.Play();
         StartCoroutine(ChangeCaptionText(0.2f, captionText));
         captionText = "";
         StartCoroutine(ChangeCaptionText(1.7f, captionText));
@@ -495,10 +522,12 @@ public class SOneMovement : MonoBehaviour {
     IEnumerator BullyPunch(float time)
     {
         yield return new WaitForSeconds(time);
+        kickSound.Play();
         bullyAnimator.SetInteger("Current State", 1);
         victimAnimator.SetInteger("Current State", 1);
 
         captionText = ("Victim: BLUH...");
+        victimGrunt.Play();
         StartCoroutine(ChangeCaptionText(0.2f, captionText));
         captionText = "";
         StartCoroutine(ChangeCaptionText(1.5f, captionText));
@@ -514,6 +543,7 @@ public class SOneMovement : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         bullyAnimator.SetInteger("Current State", 2);
+        victimGrunt.Play();
         StartCoroutine(VictimDown(0.5f));
     }
     IEnumerator FriendAgrees(float time)
@@ -535,6 +565,20 @@ public class SOneMovement : MonoBehaviour {
         yield return new WaitForSeconds(time);
         goSceneTwo = true;
     }
+    IEnumerator StopFriendAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        friendAudio.Stop();
+    }
+    IEnumerator StopBullyAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        bullyAudio.Stop();
+    }
+    IEnumerator StopVictimAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        victimAudio.Stop();
+    }
 
-    
 }

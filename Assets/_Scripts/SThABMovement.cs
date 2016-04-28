@@ -25,7 +25,14 @@ public class SThABMovement : MonoBehaviour {
     private GameObject victim;
     private bool moveToVictim;
     private Text narrativeText;
+    private Text captionTextUI;
+    private string captionText;
     private SThABSceneFadeInOut sceneFader;
+
+    public AudioSource classChat;
+    public AudioSource teacherAudio;
+    private bool stopClassChat;
+    private bool stopTeacherAudio;
 
     // Use this for initialization
     void Start () {
@@ -41,12 +48,19 @@ public class SThABMovement : MonoBehaviour {
         victim = GameObject.Find("Bullied");
 
         narrativeText = GameObject.Find("Character/Head/Main Camera/Fader/Narrative").GetComponent<Text>();
+        captionTextUI = GameObject.Find("Character/Head/Main Camera/Fader/Caption").GetComponent<Text>();
         sceneFader = GameObject.Find("Fader").GetComponent<SThABSceneFadeInOut>();
 
-        print("Teacher: OK class, time to call roll...");
-        print("Classmate: Pssst look who's not here...");
+        StartCoroutine(StopClassChat(3f));
+        StartCoroutine(StartTeacherAudio(2.8f));
+        captionText = ("Teacher: OK class, time to call roll...");
+        StartCoroutine(ChangeCaptionText(3f, captionText));
+        captionText = ("Classmate: Pssst look who's not here again...");
+        StartCoroutine(ChangeCaptionText(7f, captionText));
+        captionText = ("");
+        StartCoroutine(ChangeCaptionText(12f, captionText));
 
-        StartCoroutine(StartSceneFlow(5));
+        StartCoroutine(StartSceneFlow(13));
         
     }
 	
@@ -62,7 +76,14 @@ public class SThABMovement : MonoBehaviour {
         {
             sceneFader.EndScene(6);
         }
-
+        if (stopClassChat)
+        {
+            classChat.volume -= 0.01f;
+        }
+        if (stopTeacherAudio)
+        {
+            teacherAudio.volume -= 0.01f;
+        }
     }
 
     void enableDialog()
@@ -82,8 +103,13 @@ public class SThABMovement : MonoBehaviour {
         if (!fadeMenu)
         {
             disableDialog();
-            print("User: Looks like he's not here again today... wonder if he's OK...");
-            goNextScene = true;
+            captionText = ("You: Looks like he's not here again today... wonder if he's OK...");
+            StartCoroutine(ChangeCaptionText(0.7f, captionText));
+            captionText = ("");
+            StartCoroutine(ChangeCaptionText(5.7f, captionText));
+            StartCoroutine(StartNextScene(6f));
+            StartCoroutine(StopTeacherAudio(6f));
+            narrativeText.text = "The bullying victim has not been to school the past two weeks...";
         }
     }
 
@@ -91,5 +117,35 @@ public class SThABMovement : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         enableDialog();
+    }
+
+    IEnumerator ChangeCaptionText(float time, string textStr)
+    {
+        yield return new WaitForSeconds(time);
+        captionTextUI.text = textStr;
+    }
+
+    IEnumerator StartNextScene(float time)
+    {
+        yield return new WaitForSeconds(time);
+        goNextScene = true;
+    }
+
+    IEnumerator StopClassChat(float time)
+    {
+        yield return new WaitForSeconds(time);
+        stopClassChat = true;
+    }
+
+    IEnumerator StartTeacherAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        teacherAudio.Play();
+    }
+
+    IEnumerator StopTeacherAudio(float time)
+    {
+        yield return new WaitForSeconds(time);
+        stopTeacherAudio = true;
     }
 }

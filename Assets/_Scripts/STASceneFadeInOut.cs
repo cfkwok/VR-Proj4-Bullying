@@ -14,7 +14,11 @@ public class STASceneFadeInOut : MonoBehaviour
     private float timeToRead = 5f;
     private Text narrativeText;
     private bool callRoutine = true;
-    private int statsPath = 0;    
+    private int statsPath = 0;
+    public string levelName;
+    AsyncOperation async;
+    private bool loadScene;
+    private bool loadFlag = true;
 
     void Awake()
     {
@@ -31,6 +35,12 @@ public class STASceneFadeInOut : MonoBehaviour
         if (sceneStarting)
             // ... call the StartScene function.
             StartScene();
+
+        if (loadScene && loadFlag)
+        {
+            loadFlag = false;
+            StartLoading();
+        }
     }
 
 
@@ -95,12 +105,6 @@ public class STASceneFadeInOut : MonoBehaviour
             }
         }
 
-
-        if (textInt == 10)
-        {
-            SceneManager.LoadScene(SceneNumber);
-        }
-
     }
 
     IEnumerator ExecuteAfterTime(float time)
@@ -109,59 +113,79 @@ public class STASceneFadeInOut : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
         {
+            levelName = "bscene3a_class";
             if (textInt == 0)
             {
-                narrativeText.text = "Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
+                narrativeText.text = "\"Social exclusion is the most common form of bullying in infant classes, according to research\"";
                 textInt++;
-                timeToRead = 5f;
+                timeToRead = 8f;
             }
             else if (textInt == 1)
             {
-                narrativeText.text = "Stats say bullies are mean1 Stats say bullies are mean1";
+                narrativeText.text = "\"About 44.2 percent of middle school students have experienced teasing and name calling\"";
                 textInt++;
                 timeToRead = 10f;
             }
             else if (textInt == 2)
             {
-                narrativeText.text = "Stats say bullies are mean2";
+                narrativeText.text = "\"33 percent reported being bullied inside the classroom\"";
                 textInt++;
                 timeToRead = 5f;
             }
             else if (textInt == 3)
             {
-                narrativeText.text = "Stats say bullies are mean3";
-                textInt++;
-                timeToRead = 2f;
+                ActivateScene();
             }
         }
 
         else if (statsPath == 2)
         {
+            levelName = "scene1a_crowd";
             if (textInt == 0)
             {
-                narrativeText.text = "2Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
+                narrativeText.text = "\"Social exclusion is the most common form of bullying in infant classes, according to research\"";
                 textInt++;
-                timeToRead = 5f;
+                timeToRead = 8f;
             }
             else if (textInt == 1)
             {
-                narrativeText.text = "2Stats say bullies are mean1 Stats say bullies are mean1";
+                narrativeText.text = "\"About 44.2 percent of middle school students have experienced teasing and name calling\"";
                 textInt++;
                 timeToRead = 10f;
             }
             else if (textInt == 2)
             {
-                narrativeText.text = "2Stats say bullies are mean2";
+                narrativeText.text = "\"33 percent reported being bullied inside the classroom\"";
                 textInt++;
                 timeToRead = 5f;
             }
             else if (textInt == 3)
             {
-                narrativeText.text = "2Stats say bullies are mean3";
-                textInt++;
-                timeToRead = 2f;
+                ActivateScene();
             }
         }
+        loadScene = true;
         callRoutine = true;
+    }
+
+    public void StartLoading()
+    {
+        StartCoroutine("load");
+    }
+
+
+
+    public void ActivateScene()
+    {
+        async.allowSceneActivation = true;
+    }
+
+    IEnumerator load()
+    {
+        Debug.LogWarning("ASYNC LOAD STARTED - " +
+           "DO NOT EXIT PLAY MODE UNTIL SCENE LOADS... UNITY WILL CRASH");
+        async = SceneManager.LoadSceneAsync(levelName);
+        async.allowSceneActivation = false;
+        yield return async;
     }
 }

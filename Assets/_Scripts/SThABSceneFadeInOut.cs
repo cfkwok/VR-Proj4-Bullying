@@ -14,7 +14,11 @@ public class SThABSceneFadeInOut : MonoBehaviour
     private float timeToRead = 5f;
     private Text narrativeText;
     private bool callRoutine = true;
-    private int statsPath = 1;    
+    private int statsPath = 0;
+    public string levelName;
+    AsyncOperation async;
+    private bool loadScene;
+    private bool loadFlag = true;
 
     void Awake()
     {
@@ -31,6 +35,12 @@ public class SThABSceneFadeInOut : MonoBehaviour
         if (sceneStarting)
             // ... call the StartScene function.
             StartScene();
+
+        if (loadScene && loadFlag)
+        {
+            loadFlag = false;
+            StartLoading();
+        }
     }
 
 
@@ -75,15 +85,9 @@ public class SThABSceneFadeInOut : MonoBehaviour
 
         // Start fading towards black.
         FadeToBlack();
-
-        if (narrativeText.text.Contains("talked"))
-        {
-            statsPath = 1;
-        }
-        if (narrativeText.text.Contains("mind"))
-        {
-            statsPath = 2;
-        }
+        
+        statsPath = 1;
+     
 
         // If the screen is almost black...
         if (FadeImg.color.a >= 0.95f)
@@ -95,45 +99,87 @@ public class SThABSceneFadeInOut : MonoBehaviour
             }
         }
 
-
-        if (textInt == 10)
-        {
-            SceneManager.LoadScene(SceneNumber);
-        }
-
     }
 
     IEnumerator ExecuteAfterTime(float time)
     {
+
         callRoutine = false;
         yield return new WaitForSeconds(time);
         if (statsPath == 1)
         {
+            levelName = "scene1_crowd";
             if (textInt == 0)
             {
-                narrativeText.text = "Stats say bullies are mean0 Stats say bullies are mean0 Stats say bullies are mean0";
+                narrativeText.text = "\"Approximately 160,000 teens skip school every day because of bullying.\"";
                 textInt++;
-                timeToRead = 5f;
+                timeToRead = 8f;
             }
             else if (textInt == 1)
             {
-                narrativeText.text = "Stats say bullies are mean1 Stats say bullies are mean1";
-                textInt++;
-                timeToRead = 10f;
-            }
-            else if (textInt == 2)
-            {
-                narrativeText.text = "Stats say bullies are mean2";
+                narrativeText.text = "\"1 in 10 students drop out of school because of repeated bullying\"";
                 textInt++;
                 timeToRead = 5f;
             }
+            else if (textInt == 2)
+            {
+                narrativeText.text = "\"Bully victims are between 2 to 9 times more likely to consider suicide than non-victims, according to studies by Yale University\"";
+                textInt++;
+                timeToRead = 13f;
+            }
             else if (textInt == 3)
             {
-                narrativeText.text = "Stats say bullies are mean3";
+                narrativeText.text = "and...";
                 textInt++;
-                timeToRead = 2f;
+                timeToRead = 3f;
+            }
+            else if (textInt == 4)
+            {
+                narrativeText.text = "";
+                textInt++;
+                timeToRead = 1.5f;
+            }
+            else if (textInt == 5)
+            {
+                narrativeText.text = "Suicide is the third leading cause of death among young people, resulting in about 4,400 deaths per year";
+                textInt++;
+                timeToRead = 10f;
+            }
+            else if (textInt == 6)
+            {
+                narrativeText.text = "End of route";
+                textInt++;
+                timeToRead = 5f;
+            }
+            else if (textInt == 7)
+            {
+                ActivateScene();
             }
         }
+        loadScene = true;
         callRoutine = true;
     }
+
+
+    public void StartLoading()
+    {
+        StartCoroutine("load");
+    }
+
+
+
+    public void ActivateScene()
+    {
+        async.allowSceneActivation = true;
+    }
+
+    IEnumerator load()
+    {
+        Debug.LogWarning("ASYNC LOAD STARTED - " +
+           "DO NOT EXIT PLAY MODE UNTIL SCENE LOADS... UNITY WILL CRASH");
+        async = SceneManager.LoadSceneAsync(levelName);
+        async.allowSceneActivation = false;
+        yield return async;
+    }
+
 }
